@@ -1,0 +1,176 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Painel Administrativo | Ana Laura</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+
+<body>
+
+    <header class="cabecalho">
+
+        <a href="index.html" class="logo">ana laura.</a>
+
+        <nav>
+            <a href="index.html">Ver meu site</a>
+
+            <button
+                class="botao-sair"
+                id="botaoSair"
+                type="button">
+                Sair
+            </button>
+        </nav>
+
+    </header>
+
+    <main class="pagina">
+
+        <section class="titulo-pagina">
+
+            <p class="subtitulo">ÁREA ADMINISTRATIVA</p>
+
+            <h1>Meu <span>painel.</span></h1>
+
+            <p>
+                Bem-vinda, Ana Laura!
+                Gerencie as informações do seu portfólio.
+            </p>
+
+        </section>
+
+        <section class="painel-opcoes">
+
+            <article class="painel-card">
+
+                <i class="fa-solid fa-folder-open"></i>
+
+                <h2>Projetos</h2>
+
+                <p>
+                    Gerencie os trabalhos apresentados
+                    no seu portfólio.
+                </p>
+
+                <button type="button" id="botaoProjetos">
+                    Gerenciar projetos
+                </button>
+
+            </article>
+
+            <article class="painel-card">
+
+                <i class="fa-solid fa-envelope"></i>
+
+                <h2>Mensagens</h2>
+
+                <p>
+                    Consulte as mensagens recebidas
+                    pelo formulário de contato.
+                </p>
+
+                <button type="button" id="botaoMensagens">
+                    Ver mensagens
+                </button>
+
+            </article>
+
+        </section>
+
+        <section id="conteudoPainel" style="margin-top: 35px;">
+
+        </section>
+
+    </main>
+
+    <footer>
+        <p>© 2026 Ana Laura Lopes. Área administrativa.</p>
+    </footer>
+
+    <!-- SUPABASE -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+    <!-- JAVASCRIPT PRINCIPAL -->
+    <script src="script.js"></script>
+
+    <!-- PROTEÇÃO DO PAINEL -->
+    <script>
+
+        async function protegerPainel() {
+
+            try {
+
+                if (!window.supabaseApp) {
+                    window.location.replace("login.html");
+                    return;
+                }
+
+                const autorizado =
+                    await window.supabaseApp.verificarAdministrador();
+
+                if (!autorizado) {
+                    window.location.replace("login.html");
+                    return;
+                }
+
+                console.log("Administrador autorizado!");
+
+            } catch (erro) {
+
+                console.error("Erro ao verificar acesso:", erro);
+
+                window.location.replace("login.html");
+
+            }
+
+        }
+
+        // SAIR DA CONTA
+        document.getElementById("botaoSair")
+            .addEventListener("click", async function() {
+
+                try {
+                    await window.supabaseApp.fazerLogout();
+                } catch (erro) {
+                    alert("Não foi possível sair da conta.");
+                }
+
+            });
+
+        // ÁREA DE PROJETOS
+        document.getElementById("botaoProjetos")
+            .addEventListener("click", function() {
+
+                document.getElementById("conteudoPainel").innerHTML = `
+                    <h2>Meus projetos</h2>
+                    <p>Em breve você poderá cadastrar, editar e excluir projetos.</p>
+                `;
+
+            });
+
+        // ÁREA DE MENSAGENS
+        document.getElementById("botaoMensagens")
+            .addEventListener("click", function() {
+
+                document.getElementById("conteudoPainel").innerHTML = `
+                    <h2>Mensagens recebidas</h2>
+                    <p>Em breve você poderá visualizar as mensagens dos visitantes.</p>
+                `;
+
+            });
+
+        protegerPainel();
+
+    </script>
+
+</body>
+</html>

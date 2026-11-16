@@ -1,0 +1,145 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Área Restrita | Ana Laura</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+
+<body>
+
+    <header class="cabecalho">
+
+        <a href="index.html" class="logo">ana laura.</a>
+
+        <nav>
+            <a href="index.html">Voltar ao início</a>
+        </nav>
+
+    </header>
+
+    <main class="login-container">
+
+        <section class="login-card">
+
+            <div class="login-icone">
+                <i class="fa-solid fa-lock"></i>
+            </div>
+
+            <p class="subtitulo">ACESSO ADMINISTRATIVO</p>
+
+            <h1>Área <span>restrita.</span></h1>
+
+            <p class="login-descricao">
+                Entre com seus dados para acessar o painel administrativo.
+            </p>
+
+            <form id="loginForm">
+
+                <label for="email">E-mail</label>
+
+                <input
+                    type="email"
+                    id="email"
+                    placeholder="Digite seu e-mail"
+                    autocomplete="username"
+                    required
+                >
+
+                <label for="senha">Senha</label>
+
+                <input
+                    type="password"
+                    id="senha"
+                    placeholder="Digite sua senha"
+                    autocomplete="current-password"
+                    required
+                >
+
+                <button type="submit" id="botaoLogin">
+                    Entrar
+                </button>
+
+                <p id="mensagemLogin" role="alert"></p>
+
+            </form>
+
+            <a href="index.html" class="voltar">
+                Voltar para o site
+            </a>
+
+        </section>
+
+    </main>
+
+    <footer>
+        <p>© 2026 Ana Laura Lopes. Todos os direitos reservados.</p>
+    </footer>
+
+    <!-- CARREGAR SUPABASE PRIMEIRO -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+    <!-- DEPOIS CARREGAR O JAVASCRIPT DO PROJETO -->
+    <script src="script.js"></script>
+
+    <!-- FUNCIONAMENTO DO FORMULÁRIO -->
+    <script>
+
+        const formulario = document.getElementById("loginForm");
+
+        formulario.addEventListener("submit", async function(event) {
+
+            event.preventDefault();
+
+            const botao = document.getElementById("botaoLogin");
+            const mensagem = document.getElementById("mensagemLogin");
+
+            const email = document.getElementById("email").value.trim();
+            const senha = document.getElementById("senha").value;
+
+            botao.disabled = true;
+            botao.textContent = "Verificando...";
+            mensagem.textContent = "";
+
+            try {
+
+                if (!window.supabaseApp) {
+                    throw new Error(
+                        "Conexão com Supabase não configurada."
+                    );
+                }
+
+                await window.supabaseApp.fazerLogin(email, senha);
+
+                mensagem.style.color = "#55734D";
+                mensagem.textContent = "Acesso autorizado!";
+
+                window.location.href = "painel.html";
+
+            } catch (erro) {
+
+                mensagem.style.color = "#A13D35";
+                mensagem.textContent = erro.message;
+
+            } finally {
+
+                botao.disabled = false;
+                botao.textContent = "Entrar";
+
+            }
+
+        });
+
+    </script>
+
+</body>
+</html>
+
