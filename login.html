@@ -42,7 +42,7 @@
                 Entre com seus dados para acessar o painel administrativo.
             </p>
 
-            <form id="loginForm">
+            <form id="loginForm" onsubmit="return false;">
 
                 <label for="email">E-mail</label>
 
@@ -64,8 +64,13 @@
                     required
                 >
 
-                <button type="submit" id="botaoLogin">
+                <button
+                    type="button"
+                    id="botaoLogin"
+                    onclick="entrarNoPainel()">
+
                     Entrar
+
                 </button>
 
                 <p id="mensagemLogin" role="alert"></p>
@@ -87,30 +92,34 @@
     <!-- BIBLIOTECA SUPABASE -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
-    <!-- JAVASCRIPT DO PROJETO -->
+    <!-- CONEXÃO DO PROJETO -->
     <script src="java.js"></script>
 
-    <!-- LOGIN -->
+    <!-- FUNÇÃO DO BOTÃO ENTRAR -->
     <script>
 
-        document.getElementById("loginForm").addEventListener("submit", async function(event) {
-
-            event.preventDefault();
-
-            const botao = document.getElementById("botaoLogin");
-            const mensagem = document.getElementById("mensagemLogin");
+        async function entrarNoPainel() {
 
             const email = document.getElementById("email").value.trim();
             const senha = document.getElementById("senha").value;
 
+            const botao = document.getElementById("botaoLogin");
+            const mensagem = document.getElementById("mensagemLogin");
+
+            mensagem.textContent = "";
+
+            if (!email || !senha) {
+                mensagem.textContent = "Preencha o e-mail e a senha.";
+                return;
+            }
+
             botao.disabled = true;
             botao.textContent = "Verificando...";
-            mensagem.textContent = "";
 
             try {
 
                 if (!window.supabaseApp || !window.supabaseApp.client) {
-                    throw new Error("Supabase não foi inicializado. Confira o arquivo java.js.");
+                    throw new Error("Conexão não inicializada. Confira o arquivo java.js.");
                 }
 
                 await window.supabaseApp.fazerLogin(email, senha);
@@ -131,10 +140,10 @@
                 botao.textContent = "Entrar";
 
             }
-
-        });
+        }
 
     </script>
 
 </body>
 </html>
+
