@@ -1,38 +1,25 @@
 
-/* =====================================
-   PORTFÓLIO ANA LAURA
-   CONEXÃO COM SUPABASE
-===================================== */
+/* PORTFÓLIO ANA LAURA - SUPABASE */
 
 const SUPABASE_URL = "https://alzebirqbhxecbqgcihu.supabase.co";
 
 const SUPABASE_KEY = "sb_publishable_4UpuzVQxnsT4__guSriaNg_Nt6PVNM3";
 
-// Inicializar Supabase
 let supabaseApp = null;
 
-try {
-
-    if (!window.supabase) {
-        throw new Error("Biblioteca do Supabase não carregada.");
-    }
-
+// CONEXÃO
+if (window.supabase) {
     supabaseApp = window.supabase.createClient(
         SUPABASE_URL,
         SUPABASE_KEY
     );
-
-    console.log("Supabase inicializado!");
-
-} catch (erro) {
-    console.error("Erro na conexão:", erro);
 }
 
-// Fazer login
+// LOGIN
 async function fazerLogin(email, senha) {
 
     if (!supabaseApp) {
-        throw new Error("Não foi possível conectar ao Supabase.");
+        throw new Error("Biblioteca do Supabase não carregada.");
     }
 
     const { data, error } = await supabaseApp.auth.signInWithPassword({
@@ -41,64 +28,53 @@ async function fazerLogin(email, senha) {
     });
 
     if (error) {
-        throw new Error("Erro no login: " + error.message);
+        throw new Error(error.message);
     }
 
-    // Verificar autorização administrativa
-    const autorizado =
-        data.user.app_metadata?.role === "admin";
+    // VERIFICAR ADMINISTRADOR
+    const autorizado = data.user.app_metadata?.role === "admin";
 
     if (!autorizado) {
-
         await supabaseApp.auth.signOut();
 
         throw new Error(
-            "Login realizado, mas sua conta não possui autorização de administrador."
+            "E-mail e senha aceitos, mas falta autorização de administrador no Supabase."
         );
     }
 
     return data;
 }
 
-// Verificar administrador
+// VERIFICAR ACESSO
 async function verificarAdministrador() {
 
-    if (!supabaseApp) {
-        return false;
-    }
+    if (!supabaseApp) return false;
 
     const { data, error } = await supabaseApp.auth.getUser();
 
-    if (error || !data.user) {
-        return false;
-    }
+    if (error || !data.user) return false;
 
     return data.user.app_metadata?.role === "admin";
 }
 
-// Sair do painel
+// SAIR
 async function fazerLogout() {
 
-    if (!supabaseApp) {
-        throw new Error("Supabase não conectado.");
-    }
+    if (!supabaseApp) return;
 
-    const { error } = await supabaseApp.auth.signOut();
-
-    if (error) {
-        throw error;
-    }
+    await supabaseApp.auth.signOut();
 
     window.location.href = "login.html";
 }
 
-// Disponibilizar funções
+// DISPONIBILIZAR FUNÇÕES
 window.supabaseApp = {
     client: supabaseApp,
     fazerLogin,
     verificarAdministrador,
     fazerLogout
 };
+
 
 
 
