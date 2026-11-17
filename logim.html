@@ -84,18 +84,16 @@
         <p>© 2026 Ana Laura Lopes. Todos os direitos reservados.</p>
     </footer>
 
-    <!-- CARREGAR SUPABASE PRIMEIRO -->
+    <!-- BIBLIOTECA SUPABASE -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
-    <!-- DEPOIS CARREGAR O JAVASCRIPT DO PROJETO -->
-    <script src="script.js"></script>
+    <!-- JAVASCRIPT DO PROJETO -->
+    <script src="java.js"></script>
 
-    <!-- FUNCIONAMENTO DO FORMULÁRIO -->
+    <!-- LOGIN -->
     <script>
 
-        const formulario = document.getElementById("loginForm");
-
-        formulario.addEventListener("submit", async function(event) {
+        document.getElementById("loginForm").addEventListener("submit", async function(event) {
 
             event.preventDefault();
 
@@ -111,10 +109,8 @@
 
             try {
 
-                if (!window.supabaseApp) {
-                    throw new Error(
-                        "Conexão com Supabase não configurada."
-                    );
+                if (!window.supabaseApp || !window.supabaseApp.client) {
+                    throw new Error("Supabase não foi inicializado. Confira o arquivo java.js.");
                 }
 
                 await window.supabaseApp.fazerLogin(email, senha);
@@ -142,4 +138,3 @@
 
 </body>
 </html>
-
