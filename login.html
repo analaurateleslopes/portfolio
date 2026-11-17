@@ -1,148 +1,36 @@
 
 <!DOCTYPE html>
 <html lang="pt-BR">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>Área Restrita | Ana Laura</title>
-
+    <title>Teste do Login | Ana Laura</title>
     <link rel="stylesheet" href="style.css">
-
-    <link rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 
 <body>
 
-    <header class="cabecalho">
-
-        <a href="index.html" class="logo">ana laura.</a>
-
-        <nav>
-            <a href="index.html">Voltar ao início</a>
-        </nav>
-
-    </header>
-
     <main class="login-container">
-
         <section class="login-card">
 
-            <div class="login-icone">
-                <i class="fa-solid fa-lock"></i>
-            </div>
+            <h1>Área restrita</h1>
 
-            <p class="subtitulo">ACESSO ADMINISTRATIVO</p>
+            <label for="email">E-mail</label>
+            <input type="email" id="email" placeholder="Digite seu e-mail">
 
-            <h1>Área <span>restrita.</span></h1>
+            <label for="senha">Senha</label>
+            <input type="password" id="senha" placeholder="Digite sua senha">
 
-            <p class="login-descricao">
-                Entre com seus dados para acessar o painel administrativo.
-            </p>
+            <button type="button"
+                onclick="alert('O BOTÃO ESTÁ FUNCIONANDO!')">
+                Entrar
+            </button>
 
-            <form id="loginForm" onsubmit="return false;">
-
-                <label for="email">E-mail</label>
-
-                <input
-                    type="email"
-                    id="email"
-                    placeholder="Digite seu e-mail"
-                    autocomplete="username"
-                    required
-                >
-
-                <label for="senha">Senha</label>
-
-                <input
-                    type="password"
-                    id="senha"
-                    placeholder="Digite sua senha"
-                    autocomplete="current-password"
-                    required
-                >
-
-                <button
-                    type="button"
-                    id="botaoLogin"
-                    onclick="entrarNoPainel()">
-
-                    Entrar
-
-                </button>
-
-                <p id="mensagemLogin" role="alert"></p>
-
-            </form>
-
-            <a href="index.html" class="voltar">
-                Voltar para o site
-            </a>
+            <p>Teste de funcionamento do botão.</p>
 
         </section>
-
     </main>
-
-    <footer>
-        <p>© 2026 Ana Laura Lopes. Todos os direitos reservados.</p>
-    </footer>
-
-    <!-- BIBLIOTECA SUPABASE -->
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
-    <!-- CONEXÃO DO PROJETO -->
-    <script src="java.js"></script>
-
-    <!-- FUNÇÃO DO BOTÃO ENTRAR -->
-    <script>
-
-        async function entrarNoPainel() {
-
-            const email = document.getElementById("email").value.trim();
-            const senha = document.getElementById("senha").value;
-
-            const botao = document.getElementById("botaoLogin");
-            const mensagem = document.getElementById("mensagemLogin");
-
-            mensagem.textContent = "";
-
-            if (!email || !senha) {
-                mensagem.textContent = "Preencha o e-mail e a senha.";
-                return;
-            }
-
-            botao.disabled = true;
-            botao.textContent = "Verificando...";
-
-            try {
-
-                if (!window.supabaseApp || !window.supabaseApp.client) {
-                    throw new Error("Conexão não inicializada. Confira o arquivo java.js.");
-                }
-
-                await window.supabaseApp.fazerLogin(email, senha);
-
-                mensagem.style.color = "#55734D";
-                mensagem.textContent = "Acesso autorizado!";
-
-                window.location.href = "painel.html";
-
-            } catch (erro) {
-
-                mensagem.style.color = "#A13D35";
-                mensagem.textContent = erro.message;
-
-            } finally {
-
-                botao.disabled = false;
-                botao.textContent = "Entrar";
-
-            }
-        }
-
-    </script>
 
 </body>
 </html>
+
