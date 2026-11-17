@@ -1,32 +1,34 @@
 
-/* =========================================
+/* =====================================
    PORTFÓLIO ANA LAURA
-   CONEXÃO E AUTENTICAÇÃO SUPABASE
-========================================= */
-
-// 1. CONFIGURAÇÃO DO SUPABASE
+   CONEXÃO COM SUPABASE
+===================================== */
 
 const SUPABASE_URL = "https://alzebirqbhxecbqgcihu.supabase.co";
 
 const SUPABASE_KEY = "sb_publishable_4UpuzVQxnsT4__guSriaNg_Nt6PVNM3";
 
-// 2. INICIALIZAR CONEXÃO
-
+// Inicializar Supabase
 let supabaseApp = null;
 
-if (window.supabase) {
+try {
+
+    if (!window.supabase) {
+        throw new Error("Biblioteca do Supabase não carregada.");
+    }
+
     supabaseApp = window.supabase.createClient(
         SUPABASE_URL,
         SUPABASE_KEY
     );
 
-    console.log("Supabase conectado com sucesso!");
-} else {
-    console.error("A biblioteca do Supabase não foi carregada.");
+    console.log("Supabase inicializado!");
+
+} catch (erro) {
+    console.error("Erro na conexão:", erro);
 }
 
-// 3. FAZER LOGIN
-
+// Fazer login
 async function fazerLogin(email, senha) {
 
     if (!supabaseApp) {
@@ -39,25 +41,26 @@ async function fazerLogin(email, senha) {
     });
 
     if (error) {
-        throw new Error("E-mail ou senha incorretos.");
+        throw new Error("Erro no login: " + error.message);
     }
 
-    // Conferir se é administrador
-    const autorizado = await verificarAdministrador();
+    // Verificar autorização administrativa
+    const autorizado =
+        data.user.app_metadata?.role === "admin";
 
     if (!autorizado) {
+
         await supabaseApp.auth.signOut();
 
         throw new Error(
-            "Sua conta não possui autorização de administrador."
+            "Login realizado, mas sua conta não possui autorização de administrador."
         );
     }
 
     return data;
 }
 
-// 4. VERIFICAR ADMINISTRADOR
-
+// Verificar administrador
 async function verificarAdministrador() {
 
     if (!supabaseApp) {
@@ -70,16 +73,14 @@ async function verificarAdministrador() {
         return false;
     }
 
-    // Verificar a função administrativa
     return data.user.app_metadata?.role === "admin";
 }
 
-// 5. FAZER LOGOUT
-
+// Sair do painel
 async function fazerLogout() {
 
     if (!supabaseApp) {
-        throw new Error("Supabase não está conectado.");
+        throw new Error("Supabase não conectado.");
     }
 
     const { error } = await supabaseApp.auth.signOut();
@@ -91,8 +92,7 @@ async function fazerLogout() {
     window.location.href = "login.html";
 }
 
-// 6. DISPONIBILIZAR FUNÇÕES
-
+// Disponibilizar funções
 window.supabaseApp = {
     client: supabaseApp,
     fazerLogin,
@@ -100,18 +100,6 @@ window.supabaseApp = {
     fazerLogout
 };
 
-// 7. ATUALIZAR ANO DO RODAPÉ
-
-document.addEventListener("DOMContentLoaded", function () {
-
-    const rodape = document.querySelector("footer p");
-
-    if (rodape) {
-        rodape.textContent =
-            `© ${new Date().getFullYear()} Ana Laura Lopes. Todos os direitos reservados.`;
-    }
-
-});
 
 
 
