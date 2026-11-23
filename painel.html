@@ -14,96 +14,215 @@
         href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 
-<body>
+<body class="pagina-admin">
 
+    <!-- CABEÇALHO -->
     <header class="cabecalho">
 
         <a href="index.html" class="logo">ana laura.</a>
 
         <nav>
-            <a href="index.html">Ver meu site</a>
+            <a href="index.html">
+                <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                Ver meu site
+            </a>
 
-            <button
-                class="botao-sair"
-                id="botaoSair"
-                type="button">
+            <button class="botao-sair" id="botaoSair" type="button">
+                <i class="fa-solid fa-right-from-bracket"></i>
                 Sair
             </button>
         </nav>
 
     </header>
 
-    <main class="pagina">
 
-        <section class="titulo-pagina">
+    <main class="painel-principal">
 
-            <p class="subtitulo">ÁREA ADMINISTRATIVA</p>
+        <!-- BOAS-VINDAS -->
+        <section class="painel-boas-vindas">
 
-            <h1>Meu <span>painel.</span></h1>
+            <div>
+                <p class="subtitulo">ESPAÇO ADMINISTRATIVO</p>
+
+                <h1>
+                    Olá, Ana Laura<span>.</span>
+                </h1>
+
+                <p>
+                    Seja bem-vinda ao seu espaço de gerenciamento.
+                    Organize seus projetos e acompanhe as mensagens
+                    recebidas pelo seu portfólio.
+                </p>
+            </div>
+
+            <div class="painel-icone">
+                <i class="fa-solid fa-layer-group"></i>
+            </div>
+
+        </section>
+
+
+        <!-- RESUMO -->
+        <section class="painel-resumo">
+
+            <article class="resumo-card">
+
+                <div class="resumo-icone">
+                    <i class="fa-solid fa-folder-open"></i>
+                </div>
+
+                <div>
+                    <p>Área de projetos</p>
+                    <h2>Meus trabalhos</h2>
+                    <small>Gerencie seu portfólio</small>
+                </div>
+
+            </article>
+
+
+            <article class="resumo-card">
+
+                <div class="resumo-icone">
+                    <i class="fa-solid fa-envelope"></i>
+                </div>
+
+                <div>
+                    <p>Área de mensagens</p>
+                    <h2>Meus contatos</h2>
+                    <small>Acompanhe os visitantes</small>
+                </div>
+
+            </article>
+
+
+            <article class="resumo-card">
+
+                <div class="resumo-icone">
+                    <i class="fa-solid fa-globe"></i>
+                </div>
+
+                <div>
+                    <p>Seu espaço online</p>
+                    <h2>Portfólio</h2>
+                    <small>Seu trabalho na internet</small>
+                </div>
+
+            </article>
+
+        </section>
+
+
+        <!-- ÁREAS DE GERENCIAMENTO -->
+        <section class="painel-gerenciamento">
+
+            <div class="painel-titulo">
+                <p class="subtitulo">GERENCIAMENTO</p>
+                <h2>O que deseja fazer?</h2>
+                <p>Escolha uma das áreas abaixo para continuar.</p>
+            </div>
+
+
+            <div class="painel-opcoes">
+
+                <article class="painel-card">
+
+                    <div class="card-icone">
+                        <i class="fa-solid fa-folder-open"></i>
+                    </div>
+
+                    <span class="card-numero">01 / PROJETOS</span>
+
+                    <h2>Meus projetos</h2>
+
+                    <p>
+                        Organize os trabalhos apresentados no seu
+                        portfólio. Cadastre novos projetos e
+                        gerencie os existentes.
+                    </p>
+
+                    <button type="button" id="botaoProjetos">
+                        Gerenciar projetos
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </button>
+
+                </article>
+
+
+                <article class="painel-card">
+
+                    <div class="card-icone">
+                        <i class="fa-solid fa-envelope-open-text"></i>
+                    </div>
+
+                    <span class="card-numero">02 / CONTATOS</span>
+
+                    <h2>Mensagens recebidas</h2>
+
+                    <p>
+                        Consulte as mensagens enviadas pelos
+                        visitantes através do formulário
+                        de contato do seu site.
+                    </p>
+
+                    <button type="button" id="botaoMensagens">
+                        Ver mensagens
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </button>
+
+                </article>
+
+            </div>
+
+        </section>
+
+
+        <!-- CONTEÚDO DINÂMICO -->
+        <section class="painel-conteudo" id="conteudoPainel">
+
+            <div class="painel-conteudo-cabecalho">
+                <div>
+                    <p class="subtitulo">SEU ESPAÇO</p>
+                    <h2>Continue construindo sua trajetória.</h2>
+                </div>
+
+                <i class="fa-solid fa-sparkles"></i>
+            </div>
 
             <p>
-                Bem-vinda, Ana Laura!
-                Gerencie as informações do seu portfólio.
+                Este é seu espaço administrativo.
+                Utilize as opções acima para organizar seus projetos
+                e acompanhar os contatos recebidos.
             </p>
 
-        </section>
-
-        <section class="painel-opcoes">
-
-            <article class="painel-card">
-
-                <i class="fa-solid fa-folder-open"></i>
-
-                <h2>Projetos</h2>
-
-                <p>
-                    Gerencie os trabalhos apresentados
-                    no seu portfólio.
-                </p>
-
-                <button type="button" id="botaoProjetos">
-                    Gerenciar projetos
-                </button>
-
-            </article>
-
-            <article class="painel-card">
-
-                <i class="fa-solid fa-envelope"></i>
-
-                <h2>Mensagens</h2>
-
-                <p>
-                    Consulte as mensagens recebidas
-                    pelo formulário de contato.
-                </p>
-
-                <button type="button" id="botaoMensagens">
-                    Ver mensagens
-                </button>
-
-            </article>
-
-        </section>
-
-        <section id="conteudoPainel" style="margin-top: 35px;">
+            <a href="index.html" class="link-painel">
+                Visualizar meu portfólio
+                <i class="fa-solid fa-arrow-up-right-from-square"></i>
+            </a>
 
         </section>
 
     </main>
 
+
+    <!-- RODAPÉ -->
     <footer>
-        <p>© 2026 Ana Laura Lopes. Área administrativa.</p>
+        <p>
+            © 2026 Ana Laura Lopes. Área administrativa.
+        </p>
     </footer>
+
 
     <!-- SUPABASE -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
-   <script src="java.js"></script>
+    <!-- JAVASCRIPT DO SITE -->
+    <script src="java.js"></script>
 
-    <!-- PROTEÇÃO DO PAINEL -->
+
+    <!-- FUNCIONALIDADES DO PAINEL -->
     <script>
 
+        // PROTEÇÃO DO PAINEL
         async function protegerPainel() {
 
             try {
@@ -133,40 +252,122 @@
 
         }
 
+
         // SAIR DA CONTA
         document.getElementById("botaoSair")
             .addEventListener("click", async function() {
 
+                const botao = this;
+
                 try {
+
+                    if (!window.supabaseApp) {
+                        window.location.replace("login.html");
+                        return;
+                    }
+
+                    botao.disabled = true;
+                    botao.textContent = "Saindo...";
+
                     await window.supabaseApp.fazerLogout();
+
+                    window.location.replace("login.html");
+
                 } catch (erro) {
-                    alert("Não foi possível sair da conta.");
+
+                    console.error("Erro ao sair:", erro);
+
+                    alert("Não foi possível sair da conta. Tente novamente.");
+
+                    botao.disabled = false;
+                    botao.textContent = "Sair";
+
                 }
 
             });
 
-        // ÁREA DE PROJETOS
+
+        // MOSTRAR PROJETOS
         document.getElementById("botaoProjetos")
             .addEventListener("click", function() {
 
                 document.getElementById("conteudoPainel").innerHTML = `
-                    <h2>Meus projetos</h2>
-                    <p>Em breve você poderá cadastrar, editar e excluir projetos.</p>
+
+                    <div class="painel-conteudo-cabecalho">
+
+                        <div>
+                            <p class="subtitulo">GERENCIAMENTO</p>
+                            <h2>Meus projetos</h2>
+                        </div>
+
+                        <i class="fa-solid fa-folder-open"></i>
+
+                    </div>
+
+                    <p>
+                        Aqui ficará o gerenciamento dos projetos
+                        do seu portfólio.
+                    </p>
+
+                    <div class="aviso-painel">
+                        <i class="fa-solid fa-circle-info"></i>
+
+                        <p>
+                            A próxima etapa será conectar esta área
+                            à tabela de projetos do Supabase para
+                            cadastrar, editar e excluir trabalhos.
+                        </p>
+                    </div>
+
                 `;
+
+                document.getElementById("conteudoPainel")
+                    .scrollIntoView({ behavior: "smooth" });
 
             });
 
-        // ÁREA DE MENSAGENS
+
+        // MOSTRAR MENSAGENS
         document.getElementById("botaoMensagens")
             .addEventListener("click", function() {
 
                 document.getElementById("conteudoPainel").innerHTML = `
-                    <h2>Mensagens recebidas</h2>
-                    <p>Em breve você poderá visualizar as mensagens dos visitantes.</p>
+
+                    <div class="painel-conteudo-cabecalho">
+
+                        <div>
+                            <p class="subtitulo">CONTATOS</p>
+                            <h2>Mensagens recebidas</h2>
+                        </div>
+
+                        <i class="fa-solid fa-envelope-open-text"></i>
+
+                    </div>
+
+                    <p>
+                        Aqui ficarão disponíveis as mensagens
+                        enviadas pelos visitantes do seu site.
+                    </p>
+
+                    <div class="aviso-painel">
+                        <i class="fa-solid fa-circle-info"></i>
+
+                        <p>
+                            A próxima etapa será conectar esta área
+                            à tabela de leads do Supabase para
+                            visualizar os contatos recebidos.
+                        </p>
+                    </div>
+
                 `;
+
+                document.getElementById("conteudoPainel")
+                    .scrollIntoView({ behavior: "smooth" });
 
             });
 
+
+        // INICIAR PROTEÇÃO
         protegerPainel();
 
     </script>
