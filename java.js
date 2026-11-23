@@ -1,5 +1,8 @@
 
-/* PORTFÓLIO ANA LAURA - SUPABASE */
+/* ==========================================
+   PORTFÓLIO ANA LAURA
+   CONEXÃO E GERENCIAMENTO SUPABASE
+========================================== */
 
 const SUPABASE_URL = "https://alzebirqbhxecbqgcihu.supabase.co";
 
@@ -7,7 +10,10 @@ const SUPABASE_KEY = "sb_publishable_4UpuzVQxnsT4__guSriaNg_Nt6PVNM3";
 
 let supabaseApp = null;
 
-// CONEXÃO
+// ==========================================
+// 1. CONEXÃO COM SUPABASE
+// ==========================================
+
 if (window.supabase) {
     supabaseApp = window.supabase.createClient(
         SUPABASE_URL,
@@ -15,7 +21,10 @@ if (window.supabase) {
     );
 }
 
-// LOGIN
+// ==========================================
+// 2. LOGIN
+// ==========================================
+
 async function fazerLogin(email, senha) {
 
     if (!supabaseApp) {
@@ -31,21 +40,24 @@ async function fazerLogin(email, senha) {
         throw new Error(error.message);
     }
 
-    // VERIFICAR ADMINISTRADOR
-    const autorizado = data.user.app_metadata?.role === "admin";
+    const autorizado =
+        data.user.app_metadata?.role === "admin";
 
     if (!autorizado) {
         await supabaseApp.auth.signOut();
 
         throw new Error(
-            "E-mail e senha aceitos, mas falta autorização de administrador no Supabase."
+            "Você não possui autorização de administrador."
         );
     }
 
     return data;
 }
 
-// VERIFICAR ACESSO
+// ==========================================
+// 3. VERIFICAR ADMINISTRADOR
+// ==========================================
+
 async function verificarAdministrador() {
 
     if (!supabaseApp) return false;
@@ -57,7 +69,10 @@ async function verificarAdministrador() {
     return data.user.app_metadata?.role === "admin";
 }
 
-// SAIR
+// ==========================================
+// 4. SAIR DA CONTA
+// ==========================================
+
 async function fazerLogout() {
 
     if (!supabaseApp) return;
@@ -67,15 +82,122 @@ async function fazerLogout() {
     window.location.href = "login.html";
 }
 
-// DISPONIBILIZAR FUNÇÕES
+// ==========================================
+// 5. LISTAR PROJETOS
+// ==========================================
+
+async function listarProjetos() {
+
+    if (!supabaseApp) {
+        throw new Error("Não foi possível conectar ao Supabase.");
+    }
+
+    const { data, error } = await supabaseApp
+        .from("projetos")
+        .select("*")
+        .order("created_at", { ascending: false });
+
+    if (error) {
+        throw new Error(error.message);
+    }
+
+    return data;
+}
+
+// ==========================================
+// 6. CADASTRAR PROJETO
+// ==========================================
+
+async function cadastrarProjeto(projeto) {
+
+    if (!(await verificarAdministrador())) {
+        throw new Error("Acesso não autorizado.");
+    }
+
+    const { data, error } = await supabaseApp
+        .from("projetos")
+        .insert([{
+            titulo: projeto.titulo,
+            descricao: projeto.descricao,
+            imagem: projeto.imagem || null,
+            link: projeto.link || null,
+            categoria: projeto.categoria || null
+        }])
+        .select();
+
+    if (error) {
+        throw new Error(error.message);
+    }
+
+    return data;
+}
+
+// ==========================================
+// 7. EDITAR PROJETO
+// ==========================================
+
+async function atualizarProjeto(id, projeto) {
+
+    if (!(await verificarAdministrador())) {
+        throw new Error("Acesso não autorizado.");
+    }
+
+    const { data, error } = await supabaseApp
+        .from("projetos")
+        .update({
+            titulo: projeto.titulo,
+            descricao: projeto.descricao,
+            imagem: projeto.imagem || null,
+            link: projeto.link || null,
+            categoria: projeto.categoria || null
+        })
+        .eq("id", id)
+        .select();
+
+    if (error) {
+        throw new Error(error.message);
+    }
+
+    return data;
+}
+
+// ==========================================
+// 8. EXCLUIR PROJETO
+// ==========================================
+
+async function excluirProjeto(id) {
+
+    if (!(await verificarAdministrador())) {
+        throw new Error("Acesso não autorizado.");
+    }
+
+    const { error } = await supabaseApp
+        .from("projetos")
+        .delete()
+        .eq("id", id);
+
+    if (error) {
+        throw new Error(error.message);
+    }
+
+    return true;
+}
+
+// ==========================================
+// 9. DISPONIBILIZAR FUNÇÕES
+// ==========================================
+
 window.supabaseApp = {
+
     client: supabaseApp,
+
     fazerLogin,
     verificarAdministrador,
-    fazerLogout
+    fazerLogout,
+
+    listarProjetos,
+    cadastrarProjeto,
+    atualizarProjeto,
+    excluirProjeto
+
 };
-
-
-
-
-
