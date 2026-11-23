@@ -12,224 +12,273 @@
 
     <link rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <style>
+        .gerenciar-area {
+            max-width: 1050px;
+            margin: 0 auto;
+        }
+
+        .gerenciar-form {
+            background: #E9E3D9;
+            border: 1px solid #DDD6C9;
+            border-radius: 6px;
+            padding: 30px;
+            margin-bottom: 35px;
+        }
+
+        .gerenciar-form label {
+            display: block;
+            margin: 18px 0 8px;
+            color: #514B43;
+        }
+
+        .gerenciar-form input,
+        .gerenciar-form textarea {
+            width: 100%;
+            padding: 13px;
+            border: 1px solid #CEC5B7;
+            background: #F8F6F1;
+            border-radius: 4px;
+            font-family: Arial, sans-serif;
+        }
+
+        .gerenciar-form textarea {
+            min-height: 110px;
+            resize: vertical;
+        }
+
+        .gerenciar-form button,
+        .acao-projeto {
+            padding: 12px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            background: #514B43;
+            color: white;
+        }
+
+        .gerenciar-form button {
+            margin-top: 22px;
+            margin-right: 8px;
+        }
+
+        .botao-cancelar {
+            background: #927D66 !important;
+        }
+
+        .lista-projetos {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        .item-projeto {
+            background: #E9E3D9;
+            border: 1px solid #DDD6C9;
+            border-radius: 6px;
+            padding: 25px;
+        }
+
+        .item-projeto img {
+            width: 100%;
+            max-height: 180px;
+            object-fit: cover;
+            border-radius: 4px;
+            margin-bottom: 15px;
+        }
+
+        .item-projeto h3 {
+            margin-bottom: 12px;
+            color: #514B43;
+        }
+
+        .item-projeto p {
+            color: #696258;
+            line-height: 1.7;
+            margin-bottom: 12px;
+        }
+
+        .item-projeto small {
+            color: #927D66;
+        }
+
+        .acoes-projeto {
+            display: flex;
+            gap: 10px;
+            margin-top: 18px;
+        }
+
+        .acao-editar {
+            background: #927D66;
+        }
+
+        .acao-excluir {
+            background: #8B4038;
+        }
+
+        #statusProjetos {
+            margin: 15px 0;
+            color: #74695C;
+        }
+
+        @media(max-width: 700px) {
+            .lista-projetos {
+                grid-template-columns: 1fr;
+            }
+
+            .gerenciar-form {
+                padding: 20px;
+            }
+        }
+    </style>
+
 </head>
 
-<body class="pagina-admin">
+<body>
 
-    <!-- CABEÇALHO -->
     <header class="cabecalho">
 
         <a href="index.html" class="logo">ana laura.</a>
 
         <nav>
-            <a href="index.html">
-                <i class="fa-solid fa-arrow-up-right-from-square"></i>
-                Ver meu site
-            </a>
+            <a href="index.html">Ver meu site</a>
 
-            <button class="botao-sair" id="botaoSair" type="button">
-                <i class="fa-solid fa-right-from-bracket"></i>
+            <button class="botao-sair"
+                id="botaoSair"
+                type="button">
                 Sair
             </button>
         </nav>
 
     </header>
 
+    <main class="pagina">
 
-    <main class="painel-principal">
+        <section class="titulo-pagina">
 
-        <!-- BOAS-VINDAS -->
-        <section class="painel-boas-vindas">
+            <p class="subtitulo">ÁREA ADMINISTRATIVA</p>
 
-            <div>
-                <p class="subtitulo">ESPAÇO ADMINISTRATIVO</p>
-
-                <h1>
-                    Olá, Ana Laura<span>.</span>
-                </h1>
-
-                <p>
-                    Seja bem-vinda ao seu espaço de gerenciamento.
-                    Organize seus projetos e acompanhe as mensagens
-                    recebidas pelo seu portfólio.
-                </p>
-            </div>
-
-            <div class="painel-icone">
-                <i class="fa-solid fa-layer-group"></i>
-            </div>
-
-        </section>
-
-
-        <!-- RESUMO -->
-        <section class="painel-resumo">
-
-            <article class="resumo-card">
-
-                <div class="resumo-icone">
-                    <i class="fa-solid fa-folder-open"></i>
-                </div>
-
-                <div>
-                    <p>Área de projetos</p>
-                    <h2>Meus trabalhos</h2>
-                    <small>Gerencie seu portfólio</small>
-                </div>
-
-            </article>
-
-
-            <article class="resumo-card">
-
-                <div class="resumo-icone">
-                    <i class="fa-solid fa-envelope"></i>
-                </div>
-
-                <div>
-                    <p>Área de mensagens</p>
-                    <h2>Meus contatos</h2>
-                    <small>Acompanhe os visitantes</small>
-                </div>
-
-            </article>
-
-
-            <article class="resumo-card">
-
-                <div class="resumo-icone">
-                    <i class="fa-solid fa-globe"></i>
-                </div>
-
-                <div>
-                    <p>Seu espaço online</p>
-                    <h2>Portfólio</h2>
-                    <small>Seu trabalho na internet</small>
-                </div>
-
-            </article>
-
-        </section>
-
-
-        <!-- ÁREAS DE GERENCIAMENTO -->
-        <section class="painel-gerenciamento">
-
-            <div class="painel-titulo">
-                <p class="subtitulo">GERENCIAMENTO</p>
-                <h2>O que deseja fazer?</h2>
-                <p>Escolha uma das áreas abaixo para continuar.</p>
-            </div>
-
-
-            <div class="painel-opcoes">
-
-                <article class="painel-card">
-
-                    <div class="card-icone">
-                        <i class="fa-solid fa-folder-open"></i>
-                    </div>
-
-                    <span class="card-numero">01 / PROJETOS</span>
-
-                    <h2>Meus projetos</h2>
-
-                    <p>
-                        Organize os trabalhos apresentados no seu
-                        portfólio. Cadastre novos projetos e
-                        gerencie os existentes.
-                    </p>
-
-                    <button type="button" id="botaoProjetos">
-                        Gerenciar projetos
-                        <i class="fa-solid fa-arrow-right"></i>
-                    </button>
-
-                </article>
-
-
-                <article class="painel-card">
-
-                    <div class="card-icone">
-                        <i class="fa-solid fa-envelope-open-text"></i>
-                    </div>
-
-                    <span class="card-numero">02 / CONTATOS</span>
-
-                    <h2>Mensagens recebidas</h2>
-
-                    <p>
-                        Consulte as mensagens enviadas pelos
-                        visitantes através do formulário
-                        de contato do seu site.
-                    </p>
-
-                    <button type="button" id="botaoMensagens">
-                        Ver mensagens
-                        <i class="fa-solid fa-arrow-right"></i>
-                    </button>
-
-                </article>
-
-            </div>
-
-        </section>
-
-
-        <!-- CONTEÚDO DINÂMICO -->
-        <section class="painel-conteudo" id="conteudoPainel">
-
-            <div class="painel-conteudo-cabecalho">
-                <div>
-                    <p class="subtitulo">SEU ESPAÇO</p>
-                    <h2>Continue construindo sua trajetória.</h2>
-                </div>
-
-                <i class="fa-solid fa-sparkles"></i>
-            </div>
+            <h1>Meu <span>painel.</span></h1>
 
             <p>
-                Este é seu espaço administrativo.
-                Utilize as opções acima para organizar seus projetos
-                e acompanhar os contatos recebidos.
+                Bem-vinda, Ana Laura!
+                Gerencie os projetos do seu portfólio.
             </p>
 
-            <a href="index.html" class="link-painel">
-                Visualizar meu portfólio
-                <i class="fa-solid fa-arrow-up-right-from-square"></i>
-            </a>
-
         </section>
+
+        <div class="gerenciar-area">
+
+            <section class="gerenciar-form">
+
+                <p class="subtitulo">GERENCIAMENTO</p>
+
+                <h2 id="tituloFormulario">
+                    Cadastrar novo projeto
+                </h2>
+
+                <form id="formProjeto">
+
+                    <input type="hidden" id="projetoId">
+
+                    <label for="titulo">Nome do projeto</label>
+                    <input
+                        type="text"
+                        id="titulo"
+                        required
+                        placeholder="Ex.: Cardápio Digital">
+
+                    <label for="descricao">Descrição</label>
+                    <textarea
+                        id="descricao"
+                        required
+                        placeholder="Conte um pouco sobre o projeto..."></textarea>
+
+                    <label for="categoria">Categoria ou tecnologias</label>
+                    <input
+                        type="text"
+                        id="categoria"
+                        placeholder="Ex.: HTML, CSS e JavaScript">
+
+                    <label for="imagem">Endereço da imagem</label>
+                    <input
+                        type="url"
+                        id="imagem"
+                        placeholder="https://...">
+
+                    <label for="link">Link do projeto</label>
+                    <input
+                        type="url"
+                        id="link"
+                        placeholder="https://...">
+
+                    <button type="submit" id="botaoSalvar">
+                        <i class="fa-solid fa-plus"></i>
+                        Cadastrar projeto
+                    </button>
+
+                    <button
+                        type="button"
+                        id="botaoCancelar"
+                        class="botao-cancelar"
+                        hidden>
+                        Cancelar edição
+                    </button>
+
+                </form>
+
+                <p id="statusProjetos" aria-live="polite"></p>
+
+            </section>
+
+            <section>
+
+                <div class="titulo-pagina">
+                    <p class="subtitulo">SEUS TRABALHOS</p>
+                    <h2>Projetos cadastrados</h2>
+                    <p>Gerencie os projetos apresentados no seu site.</p>
+                </div>
+
+                <div id="listaProjetos" class="lista-projetos">
+
+                    <p>Carregando projetos...</p>
+
+                </div>
+
+            </section>
+
+        </div>
 
     </main>
 
-
-    <!-- RODAPÉ -->
     <footer>
-        <p>
-            © 2026 Ana Laura Lopes. Área administrativa.
-        </p>
+        <p>© 2026 Ana Laura Lopes. Área administrativa.</p>
     </footer>
 
-
-    <!-- SUPABASE -->
+    <!-- BIBLIOTECA SUPABASE -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
-    <!-- JAVASCRIPT DO SITE -->
+    <!-- SEU JAVASCRIPT -->
     <script src="java.js"></script>
 
-
-    <!-- FUNCIONALIDADES DO PAINEL -->
     <script>
 
-        // PROTEÇÃO DO PAINEL
-        async function protegerPainel() {
+        const formulario = document.getElementById("formProjeto");
+        const lista = document.getElementById("listaProjetos");
+        const status = document.getElementById("statusProjetos");
+
+        const botaoSalvar = document.getElementById("botaoSalvar");
+        const botaoCancelar = document.getElementById("botaoCancelar");
+
+        // PROTEGER PAINEL
+
+        async function iniciarPainel() {
 
             try {
 
                 if (!window.supabaseApp) {
-                    window.location.replace("login.html");
-                    return;
+                    throw new Error("Conexão não encontrada.");
                 }
 
                 const autorizado =
@@ -240,135 +289,312 @@
                     return;
                 }
 
-                console.log("Administrador autorizado!");
+                await carregarProjetos();
 
             } catch (erro) {
 
-                console.error("Erro ao verificar acesso:", erro);
-
+                console.error(erro);
                 window.location.replace("login.html");
 
             }
 
         }
 
+        // PROTEÇÃO CONTRA HTML INSERIDO NOS DADOS
 
-        // SAIR DA CONTA
-        document.getElementById("botaoSair")
-            .addEventListener("click", async function() {
+        function escapar(texto) {
 
-                const botao = this;
+            return String(texto ?? "").replace(/[&<>"']/g, letra => ({
+                "&": "&amp;",
+                "<": "&lt;",
+                ">": "&gt;",
+                '"': "&quot;",
+                "'": "&#39;"
+            })[letra]);
 
-                try {
+        }
 
-                    if (!window.supabaseApp) {
-                        window.location.replace("login.html");
-                        return;
-                    }
+        function enderecoSeguro(valor) {
 
-                    botao.disabled = true;
-                    botao.textContent = "Saindo...";
+            try {
 
-                    await window.supabaseApp.fazerLogout();
+                const url = new URL(valor);
 
-                    window.location.replace("login.html");
+                if (url.protocol === "https:" || url.protocol === "http:") {
+                    return url.href;
+                }
 
-                } catch (erro) {
+            } catch (erro) {}
 
-                    console.error("Erro ao sair:", erro);
+            return "";
 
-                    alert("Não foi possível sair da conta. Tente novamente.");
+        }
 
-                    botao.disabled = false;
-                    botao.textContent = "Sair";
+        // CARREGAR PROJETOS
+
+        async function carregarProjetos() {
+
+            lista.innerHTML = "<p>Carregando projetos...</p>";
+
+            try {
+
+                const projetos =
+                    await window.supabaseApp.listarProjetos();
+
+                if (!projetos.length) {
+
+                    lista.innerHTML = `
+                        <p>Você ainda não cadastrou projetos.</p>
+                    `;
+
+                    return;
+                }
+
+                lista.innerHTML = projetos.map(projeto => {
+
+                    const imagem = enderecoSeguro(projeto.imagem);
+                    const link = enderecoSeguro(projeto.link);
+
+                    return `
+
+                        <article class="item-projeto">
+
+                            ${imagem ? `
+                                <img src="${escapar(imagem)}"
+                                     alt="${escapar(projeto.titulo)}">
+                            ` : ""}
+
+                            <h3>${escapar(projeto.titulo)}</h3>
+
+                            <p>${escapar(projeto.descricao)}</p>
+
+                            <small>
+                                ${escapar(projeto.categoria || "Sem categoria")}
+                            </small>
+
+                            ${link ? `
+                                <p>
+                                    <a href="${escapar(link)}"
+                                       target="_blank"
+                                       rel="noopener noreferrer">
+                                       Ver projeto
+                                    </a>
+                                </p>
+                            ` : ""}
+
+                            <div class="acoes-projeto">
+
+                                <button
+                                    type="button"
+                                    class="acao-projeto acao-editar"
+                                    data-editar="${Number(projeto.id)}">
+                                    Editar
+                                </button>
+
+                                <button
+                                    type="button"
+                                    class="acao-projeto acao-excluir"
+                                    data-excluir="${Number(projeto.id)}">
+                                    Excluir
+                                </button>
+
+                            </div>
+
+                        </article>
+
+                    `;
+
+                }).join("");
+
+            } catch (erro) {
+
+                console.error(erro);
+
+                lista.innerHTML = `
+                    <p>Não foi possível carregar os projetos.</p>
+                `;
+
+                status.textContent = erro.message;
+
+            }
+
+        }
+
+        // CADASTRAR OU EDITAR
+
+        formulario.addEventListener("submit", async function(evento) {
+
+            evento.preventDefault();
+
+            botaoSalvar.disabled = true;
+            status.textContent = "Salvando projeto...";
+
+            const projeto = {
+
+                titulo: document.getElementById("titulo").value.trim(),
+
+                descricao: document.getElementById("descricao").value.trim(),
+
+                categoria: document.getElementById("categoria").value.trim(),
+
+                imagem: document.getElementById("imagem").value.trim(),
+
+                link: document.getElementById("link").value.trim()
+
+            };
+
+            const id = document.getElementById("projetoId").value;
+
+            try {
+
+                if (id) {
+
+                    await window.supabaseApp.atualizarProjeto(
+                        Number(id),
+                        projeto
+                    );
+
+                    status.textContent = "Projeto atualizado com sucesso!";
+
+                } else {
+
+                    await window.supabaseApp.cadastrarProjeto(projeto);
+
+                    status.textContent = "Projeto cadastrado com sucesso!";
 
                 }
 
+                formulario.reset();
+                document.getElementById("projetoId").value = "";
+
+                document.getElementById("tituloFormulario").textContent =
+                    "Cadastrar novo projeto";
+
+                botaoSalvar.innerHTML =
+                    '<i class="fa-solid fa-plus"></i> Cadastrar projeto';
+
+                botaoCancelar.hidden = true;
+
+                await carregarProjetos();
+
+            } catch (erro) {
+
+                console.error(erro);
+                status.textContent = "Erro: " + erro.message;
+
+            } finally {
+
+                botaoSalvar.disabled = false;
+
+            }
+
+        });
+
+        // CLIQUES DE EDITAR E EXCLUIR
+
+        lista.addEventListener("click", async function(evento) {
+
+            const editar = evento.target.closest("[data-editar]");
+            const excluir = evento.target.closest("[data-excluir]");
+
+            if (editar) {
+
+                try {
+
+                    const projetos =
+                        await window.supabaseApp.listarProjetos();
+
+                    const projeto = projetos.find(
+                        item => item.id === Number(editar.dataset.editar)
+                    );
+
+                    if (!projeto) return;
+
+                    document.getElementById("projetoId").value = projeto.id;
+                    document.getElementById("titulo").value = projeto.titulo;
+                    document.getElementById("descricao").value = projeto.descricao;
+                    document.getElementById("categoria").value = projeto.categoria || "";
+                    document.getElementById("imagem").value = projeto.imagem || "";
+                    document.getElementById("link").value = projeto.link || "";
+
+                    document.getElementById("tituloFormulario").textContent =
+                        "Editar projeto";
+
+                    botaoSalvar.textContent = "Salvar alterações";
+                    botaoCancelar.hidden = false;
+
+                    formulario.scrollIntoView({
+                        behavior: "smooth"
+                    });
+
+                } catch (erro) {
+
+                    status.textContent = erro.message;
+
+                }
+
+            }
+
+            if (excluir) {
+
+                const confirmar = confirm(
+                    "Tem certeza que deseja excluir este projeto?"
+                );
+
+                if (!confirmar) return;
+
+                try {
+
+                    await window.supabaseApp.excluirProjeto(
+                        Number(excluir.dataset.excluir)
+                    );
+
+                    status.textContent = "Projeto excluído com sucesso!";
+
+                    await carregarProjetos();
+
+                } catch (erro) {
+
+                    status.textContent = "Erro: " + erro.message;
+
+                }
+
+            }
+
+        });
+
+        // CANCELAR EDIÇÃO
+
+        botaoCancelar.addEventListener("click", function() {
+
+            formulario.reset();
+
+            document.getElementById("projetoId").value = "";
+
+            document.getElementById("tituloFormulario").textContent =
+                "Cadastrar novo projeto";
+
+            botaoSalvar.innerHTML =
+                '<i class="fa-solid fa-plus"></i> Cadastrar projeto';
+
+            botaoCancelar.hidden = true;
+
+            status.textContent = "";
+
+        });
+
+        // SAIR
+
+        document.getElementById("botaoSair")
+            .addEventListener("click", async function() {
+
+                await window.supabaseApp.fazerLogout();
+
             });
 
+        // INICIAR
 
-        // MOSTRAR PROJETOS
-        document.getElementById("botaoProjetos")
-            .addEventListener("click", function() {
-
-                document.getElementById("conteudoPainel").innerHTML = `
-
-                    <div class="painel-conteudo-cabecalho">
-
-                        <div>
-                            <p class="subtitulo">GERENCIAMENTO</p>
-                            <h2>Meus projetos</h2>
-                        </div>
-
-                        <i class="fa-solid fa-folder-open"></i>
-
-                    </div>
-
-                    <p>
-                        Aqui ficará o gerenciamento dos projetos
-                        do seu portfólio.
-                    </p>
-
-                    <div class="aviso-painel">
-                        <i class="fa-solid fa-circle-info"></i>
-
-                        <p>
-                            A próxima etapa será conectar esta área
-                            à tabela de projetos do Supabase para
-                            cadastrar, editar e excluir trabalhos.
-                        </p>
-                    </div>
-
-                `;
-
-                document.getElementById("conteudoPainel")
-                    .scrollIntoView({ behavior: "smooth" });
-
-            });
-
-
-        // MOSTRAR MENSAGENS
-        document.getElementById("botaoMensagens")
-            .addEventListener("click", function() {
-
-                document.getElementById("conteudoPainel").innerHTML = `
-
-                    <div class="painel-conteudo-cabecalho">
-
-                        <div>
-                            <p class="subtitulo">CONTATOS</p>
-                            <h2>Mensagens recebidas</h2>
-                        </div>
-
-                        <i class="fa-solid fa-envelope-open-text"></i>
-
-                    </div>
-
-                    <p>
-                        Aqui ficarão disponíveis as mensagens
-                        enviadas pelos visitantes do seu site.
-                    </p>
-
-                    <div class="aviso-painel">
-                        <i class="fa-solid fa-circle-info"></i>
-
-                        <p>
-                            A próxima etapa será conectar esta área
-                            à tabela de leads do Supabase para
-                            visualizar os contatos recebidos.
-                        </p>
-                    </div>
-
-                `;
-
-                document.getElementById("conteudoPainel")
-                    .scrollIntoView({ behavior: "smooth" });
-
-            });
-
-
-        // INICIAR PROTEÇÃO
-        protegerPainel();
+        iniciarPainel();
 
     </script>
 
