@@ -64,9 +64,9 @@
                     </div>
                 </div>
 
-                <!-- CAIXA DA FOTO ATUALIZADA -->
                 <div class="foto-placeholder">
-                    <img src="minha-foto.jpg" alt="Foto de Ana Laura" class="foto-perfil">
+                    <i class="fa-regular fa-user"></i>
+                    <p>Espaço para minha foto</p>
                 </div>
 
             </div>
@@ -116,46 +116,6 @@
             </div>
         </section>
 
-        <!-- NOVA SECTION 1: FORMAÇÃO E CERTIFICAÇÕES -->
-        <section class="formacao-home">
-            <div class="container">
-
-                <div class="titulo-secao">
-                    <span>QUALIFICAÇÃO</span>
-                    <h2>Formação e Cursos</h2>
-                </div>
-
-                <div class="projetos-grid">
-
-                    <article class="projeto-card">
-                        <div class="projeto-imagem">
-                            <i class="fa-solid fa-graduation-cap"></i>
-                        </div>
-                        <h3>Tecnologia da Informação</h3>
-                        <p>Graduação / Curso Técnico em andamento com foco em desenvolvimento e banco de dados.</p>
-                    </article>
-
-                    <article class="projeto-card">
-                        <div class="projeto-imagem">
-                            <i class="fa-solid fa-code"></i>
-                        </div>
-                        <h3>Desenvolvimento Web</h3>
-                        <p>Criação de interfaces responsivas e modernas utilizando HTML5, CSS3 e JavaScript.</p>
-                    </article>
-
-                    <article class="projeto-card">
-                        <div class="projeto-imagem">
-                            <i class="fa-solid fa-database"></i>
-                        </div>
-                        <h3>Banco de Dados e Dados</h3>
-                        <p>Modelagem relacional, consultas SQL e análise de dados com Excel.</p>
-                    </article>
-
-                </div>
-
-            </div>
-        </section>
-
         <!-- PROJETOS -->
         <section class="projetos-home">
             <div class="container">
@@ -196,46 +156,6 @@
                 <a href="portfolio.html" class="btn">
                     Ver todos os projetos
                 </a>
-
-            </div>
-        </section>
-
-        <!-- NOVA SECTION 2: DIFERENCIAIS / OBJETIVOS -->
-        <section class="diferenciais-home">
-            <div class="container">
-
-                <div class="titulo-secao">
-                    <span>COMO EU TRABALHO</span>
-                    <h2>Meus diferenciais</h2>
-                </div>
-
-                <div class="projetos-grid">
-
-                    <article class="projeto-card">
-                        <div class="projeto-imagem">
-                            <i class="fa-solid fa-mobile-screen"></i>
-                        </div>
-                        <h3>Design Responsivo</h3>
-                        <p>Sites adaptados para funcionar perfeitamente tanto no computador quanto no celular.</p>
-                    </article>
-
-                    <article class="projeto-card">
-                        <div class="projeto-imagem">
-                            <i class="fa-solid fa-layer-group"></i>
-                        </div>
-                        <h3>Código Organizado</h3>
-                        <p>Estrutura limpa, semântica e versionada utilizando boas práticas com Git e GitHub.</p>
-                    </article>
-
-                    <article class="projeto-card">
-                        <div class="projeto-imagem">
-                            <i class="fa-solid fa-rocket"></i>
-                        </div>
-                        <h3>Evolução Contínua</h3>
-                        <p>Foco constante em aprender novas tecnologias para resolver problemas reais.</p>
-                    </article>
-
-                </div>
 
             </div>
         </section>
@@ -291,4 +211,47 @@
                             name="privacidade" required>
 
                         <label for="privacidade">
-                            Autorizo o
+                            Autorizo o envio e armazenamento dos meus dados
+                            para que Ana Laura possa responder meu contato.
+                        </label>
+                    </div>
+
+                    <button type="submit"
+                        class="btn-contato campo-completo">
+                        Enviar mensagem
+                    </button>
+
+                    <p id="retornoContato"
+                        class="campo-completo"
+                        aria-live="polite"></p>
+
+                </form>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- RODAPÉ -->
+    <footer class="rodape">
+        <div class="container">
+            <p>© 2026 Ana Laura. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+    <!-- BOTÃO WHATSAPP (Troque SEUNUMERO por 55 + DDD + Número) -->
+    <a href="https://wa.me/SEUNUMERO"
+        class="whatsapp-flutuante"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="Conversar pelo WhatsApp">
+        <i class="fa-brands fa-whatsapp"></i>
+    </a>
+
+    <!-- BIBLIOTECA SUPABASE -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+    <!-- JAVASCRIPT DO PORTFÓLIO -->
+    <script src="java.js"></script>
+
+</body>
+</html>
