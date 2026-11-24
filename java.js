@@ -7,7 +7,7 @@ const SUPABASE_URL = "https://alzebirqbhxecbqgcihu.supabase.co";
 const SUPABASE_KEY = "sb_publishable_4UpuzVQxnsT4__guSriaNg_Nt6PVNM3";
 
 // COLOQUE SEU NÚMERO AQUI (Ex: 5511999999999)
-const MEU_WHATSAPP = "5500000000000";
+const MEU_WHATSAPP = "55 33999855969";
 
 let supabaseApp = null;
 
