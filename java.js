@@ -5,7 +5,6 @@
 ========================================== */
 
 const SUPABASE_URL = "https://alzebirqbhxecbqgcihu.supabase.co";
-
 const SUPABASE_KEY = "sb_publishable_4UpuzVQxnsT4__guSriaNg_Nt6PVNM3";
 
 let supabaseApp = null;
@@ -26,7 +25,6 @@ if (window.supabase) {
 // ==========================================
 
 async function fazerLogin(email, senha) {
-
     if (!supabaseApp) {
         throw new Error("Biblioteca do Supabase não carregada.");
     }
@@ -36,19 +34,13 @@ async function fazerLogin(email, senha) {
         password: senha
     });
 
-    if (error) {
-        throw new Error(error.message);
-    }
+    if (error) throw new Error(error.message);
 
-    const autorizado =
-        data.user.app_metadata?.role === "admin";
+    const autorizado = data.user.app_metadata?.role === "admin";
 
     if (!autorizado) {
         await supabaseApp.auth.signOut();
-
-        throw new Error(
-            "Você não possui autorização de administrador."
-        );
+        throw new Error("Você não possui autorização de administrador.");
     }
 
     return data;
@@ -59,7 +51,6 @@ async function fazerLogin(email, senha) {
 // ==========================================
 
 async function verificarAdministrador() {
-
     if (!supabaseApp) return false;
 
     const { data, error } = await supabaseApp.auth.getUser();
@@ -74,11 +65,9 @@ async function verificarAdministrador() {
 // ==========================================
 
 async function fazerLogout() {
-
     if (!supabaseApp) return;
 
     await supabaseApp.auth.signOut();
-
     window.location.href = "login.html";
 }
 
@@ -87,7 +76,6 @@ async function fazerLogout() {
 // ==========================================
 
 async function listarProjetos() {
-
     if (!supabaseApp) {
         throw new Error("Não foi possível conectar ao Supabase.");
     }
@@ -97,9 +85,7 @@ async function listarProjetos() {
         .select("*")
         .order("created_at", { ascending: false });
 
-    if (error) {
-        throw new Error(error.message);
-    }
+    if (error) throw new Error(error.message);
 
     return data;
 }
@@ -109,7 +95,6 @@ async function listarProjetos() {
 // ==========================================
 
 async function cadastrarProjeto(projeto) {
-
     if (!(await verificarAdministrador())) {
         throw new Error("Acesso não autorizado.");
     }
@@ -125,9 +110,7 @@ async function cadastrarProjeto(projeto) {
         }])
         .select();
 
-    if (error) {
-        throw new Error(error.message);
-    }
+    if (error) throw new Error(error.message);
 
     return data;
 }
@@ -137,7 +120,6 @@ async function cadastrarProjeto(projeto) {
 // ==========================================
 
 async function atualizarProjeto(id, projeto) {
-
     if (!(await verificarAdministrador())) {
         throw new Error("Acesso não autorizado.");
     }
@@ -154,9 +136,7 @@ async function atualizarProjeto(id, projeto) {
         .eq("id", id)
         .select();
 
-    if (error) {
-        throw new Error(error.message);
-    }
+    if (error) throw new Error(error.message);
 
     return data;
 }
@@ -166,7 +146,6 @@ async function atualizarProjeto(id, projeto) {
 // ==========================================
 
 async function excluirProjeto(id) {
-
     if (!(await verificarAdministrador())) {
         throw new Error("Acesso não autorizado.");
     }
@@ -176,19 +155,35 @@ async function excluirProjeto(id) {
         .delete()
         .eq("id", id);
 
-    if (error) {
-        throw new Error(error.message);
-    }
+    if (error) throw new Error(error.message);
 
     return true;
 }
 
 // ==========================================
-// 9. DISPONIBILIZAR FUNÇÕES
+// 9. ENVIAR MENSAGEM DE CONTATO
+// ==========================================
+
+async function enviarLead(dados) {
+    if (!supabaseApp) {
+        throw new Error("Conexão com o Supabase não encontrada.");
+    }
+
+    const { data, error } = await supabaseApp
+        .from("leads")
+        .insert([dados])
+        .select();
+
+    if (error) throw new Error(error.message);
+
+    return data;
+}
+
+// ==========================================
+// 10. DISPONIBILIZAR FUNÇÕES
 // ==========================================
 
 window.supabaseApp = {
-
     client: supabaseApp,
 
     fazerLogin,
@@ -198,13 +193,14 @@ window.supabaseApp = {
     listarProjetos,
     cadastrarProjeto,
     atualizarProjeto,
-    excluirProjeto
+    excluirProjeto,
 
+    enviarLead
 };
 
-/* =====================================
-   FORMULÁRIO DE CONTATO - SUPABASE
-===================================== */
+// ==========================================
+// 11. FORMULÁRIO DE CONTATO
+// ==========================================
 
 document.addEventListener("DOMContentLoaded", function () {
 
@@ -222,30 +218,34 @@ document.addEventListener("DOMContentLoaded", function () {
         botao.textContent = "Enviando...";
 
         try {
-            if (!window.supabaseApp || !window.supabaseApp.enviarLead) {
-                throw new Error("Conexão com o Supabase não encontrada.");
-            }
-
-            await window.supabaseApp.enviarLead({
+            const dados = {
                 nome: document.getElementById("nome").value.trim(),
                 email: document.getElementById("email").value.trim(),
                 wttszap: document.getElementById("whatsapp").value.trim(),
                 assunto: document.getElementById("assunto").value.trim(),
                 mensagem: document.getElementById("mensagem").value.trim(),
                 "aceitou privacidade": document.getElementById("privacidade").checked
-            });
+            };
+
+            if (!dados.nome || !dados.email || !dados.mensagem) {
+                throw new Error("Preencha todos os campos obrigatórios.");
+            }
+
+            if (!dados["aceitou privacidade"]) {
+                throw new Error("É necessário aceitar a política de privacidade.");
+            }
+
+            await enviarLead(dados);
 
             retorno.textContent = "Mensagem enviada com sucesso!";
             formulario.reset();
 
         } catch (erro) {
-            console.error(erro);
-            retorno.textContent = "Não foi possível enviar. Verifique a conexão e tente novamente.";
+            console.error("Erro ao enviar contato:", erro);
+            retorno.textContent = erro.message || "Não foi possível enviar sua mensagem.";
+        } finally {
+            botao.disabled = false;
+            botao.textContent = "Enviar mensagem";
         }
-
-        botao.disabled = false;
-        botao.textContent = "Enviar mensagem";
     });
-
 });
-
