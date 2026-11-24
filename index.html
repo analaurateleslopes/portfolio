@@ -1,286 +1,62 @@
 
-<!DOCTYPE html>
-<html lang="pt-BR">
+<section id="contato" class="contato-home">
+    <div class="container">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <div class="titulo-secao">
+            <span>FALE COMIGO</span>
+            <h2>Vamos conversar?</h2>
+            <p>Preencha o formulário abaixo. Sua mensagem será enviada diretamente para meu painel.</p>
+        </div>
 
-    <title>Ana Laura | Portfólio</title>
+        <form id="formContato" class="form-contato">
 
-    <link rel="stylesheet" href="style.css">
-
-    <link rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-</head>
-
-<body>
-
-    <!-- MENU -->
-    <header class="cabecalho">
-
-        <a href="index.html" class="logo">ana laura.</a>
-
-        <nav>
-            <a href="index.html">Início</a>
-            <a href="quemsoueu.html">Sobre mim</a>
-            <a href="portfolio.html">Portfólio</a>
-            <a href="#contato">Contato</a>
-
-            <a href="login.html" class="cadeado"
-                aria-label="Área restrita"
-                title="Área administrativa">
-                <i class="fa-solid fa-lock"></i>
-            </a>
-        </nav>
-
-    </header>
-
-    <main>
-
-        <!-- APRESENTAÇÃO PRINCIPAL -->
-        <section class="inicio">
-
-            <div class="apresentacao">
-
-                <p class="subtitulo">
-                    BEM-VINDO AO MEU PORTFÓLIO
-                </p>
-
-                <h1>
-                    Olá, eu sou <span>Ana Laura.</span>
-                </h1>
-
-                <h2>
-                    Estudante de Tecnologia da Informação.
-                </h2>
-
-                <p class="descricao">
-                    Conhecimento, criatividade e novos caminhos.
-                    Este é meu espaço para compartilhar minha trajetória,
-                    apresentar meus conhecimentos e mostrar os projetos
-                    que desenvolvo durante meus estudos.
-                </p>
-
-                <div class="botoes-inicio">
-
-                    <a href="quemsoueu.html" class="botao">
-                        Conheça minha história
-                        <i class="fa-solid fa-arrow-right"></i>
-                    </a>
-
-                    <a href="portfolio.html" class="botao-secundario">
-                        Ver meus projetos
-                    </a>
-
-                </div>
-
+            <div class="campo-contato">
+                <label for="nome">Nome completo</label>
+                <input type="text" id="nome" name="nome"
+                    placeholder="Digite seu nome" required>
             </div>
 
-            <div class="foto">
-
-                <div class="foto-placeholder">
-                    <i class="fa-regular fa-user"></i>
-                    <p>Sua foto aqui</p>
-                </div>
-
+            <div class="campo-contato">
+                <label for="email">E-mail</label>
+                <input type="email" id="email" name="email"
+                    placeholder="seuemail@exemplo.com" required>
             </div>
 
-        </section>
-
-
-        <!-- SOBRE MIM -->
-        <section class="secao-home sobre-home">
-
-            <div class="titulo-secao">
-                <p class="subtitulo">UM POUCO SOBRE MIM</p>
-                <h2>Conhecimento que constrói <span>caminhos.</span></h2>
+            <div class="campo-contato">
+                <label for="whatsapp">WhatsApp</label>
+                <input type="tel" id="whatsapp" name="whatsapp"
+                    placeholder="(00) 00000-0000" required>
             </div>
 
-            <p class="texto-secao">
-                Sou Ana Laura, estudante do ensino médio e do curso
-                de Tecnologia da Informação. Tenho interesse pelo
-                universo da tecnologia, desenvolvimento de sites
-                e criação de projetos digitais.
-
-                Acredito que cada aprendizado representa uma
-                oportunidade de crescer, descobrir novas possibilidades
-                e construir meu futuro profissional.
-            </p>
-
-            <a href="quemsoueu.html" class="link-secao">
-                Saiba mais sobre mim
-                <i class="fa-solid fa-arrow-right"></i>
-            </a>
-
-        </section>
-
-
-        <!-- HABILIDADES -->
-        <section class="secao-home habilidades-home">
-
-            <div class="titulo-secao">
-                <p class="subtitulo">MEUS CONHECIMENTOS</p>
-                <h2>Aprendendo e <span>evoluindo.</span></h2>
-                <p>
-                    Algumas das tecnologias e ferramentas
-                    que fazem parte da minha jornada.
-                </p>
+            <div class="campo-contato">
+                <label for="assunto">Assunto</label>
+                <input type="text" id="assunto" name="assunto"
+                    placeholder="Sobre o que deseja conversar?" required>
             </div>
 
-            <div class="habilidades-grid">
-
-                <div class="habilidade">
-                    <i class="fa-brands fa-html5"></i>
-                    <h3>HTML</h3>
-                    <p>Estrutura de páginas web.</p>
-                </div>
-
-                <div class="habilidade">
-                    <i class="fa-brands fa-css3-alt"></i>
-                    <h3>CSS</h3>
-                    <p>Estilização e identidade visual.</p>
-                </div>
-
-                <div class="habilidade">
-                    <i class="fa-brands fa-js"></i>
-                    <h3>JavaScript</h3>
-                    <p>Interatividade e funcionalidades.</p>
-                </div>
-
-                <div class="habilidade">
-                    <i class="fa-solid fa-database"></i>
-                    <h3>SQL</h3>
-                    <p>Organização de dados.</p>
-                </div>
-
-                <div class="habilidade">
-                    <i class="fa-solid fa-table"></i>
-                    <h3>Excel</h3>
-                    <p>Planilhas e organização.</p>
-                </div>
-
-                <div class="habilidade">
-                    <i class="fa-brands fa-github"></i>
-                    <h3>GitHub</h3>
-                    <p>Projetos e versionamento.</p>
-                </div>
-
+            <div class="campo-contato campo-completo">
+                <label for="mensagem">Mensagem</label>
+                <textarea id="mensagem" name="mensagem"
+                    placeholder="Escreva sua mensagem..." rows="5"
+                    required></textarea>
             </div>
 
-        </section>
-
-
-        <!-- PROJETOS EM DESTAQUE -->
-        <section class="secao-home projetos-home">
-
-            <div class="titulo-secao">
-                <p class="subtitulo">MEUS TRABALHOS</p>
-                <h2>Projetos em <span>destaque.</span></h2>
-                <p>
-                    Conheça alguns trabalhos desenvolvidos
-                    durante minha trajetória de aprendizagem.
-                </p>
+            <div class="privacidade campo-completo">
+                <input type="checkbox" id="privacidade"
+                    name="privacidade" required>
+                <label for="privacidade">
+                    Autorizo o envio e armazenamento dos meus dados
+                    para que Ana Laura possa responder meu contato.
+                </label>
             </div>
 
-            <div class="projetos-destaque">
+            <button type="submit" class="btn-contato campo-completo">
+                Enviar mensagem
+            </button>
 
-                <article class="projeto-card">
-                    <span>01</span>
-                    <i class="fa-solid fa-utensils"></i>
-                    <h3>Cardápio Digital</h3>
-                    <p>
-                        Desenvolvimento de um cardápio digital
-                        com categorias, produtos e carrinho.
-                    </p>
-                    <small>HTML · CSS · JavaScript</small>
-                </article>
+            <p id="retornoContato" class="campo-completo"
+                aria-live="polite"></p>
 
-                <article class="projeto-card">
-                    <span>02</span>
-                    <i class="fa-solid fa-database"></i>
-                    <h3>Banco de Dados Escolar</h3>
-                    <p>
-                        Organização e gerenciamento de
-                        informações utilizando banco de dados.
-                    </p>
-                    <small>SQL · Supabase</small>
-                </article>
-
-                <article class="projeto-card">
-                    <span>03</span>
-                    <i class="fa-solid fa-laptop-code"></i>
-                    <h3>Site Pessoal</h3>
-                    <p>
-                        Criação de um espaço digital para
-                        apresentação pessoal e profissional.
-                    </p>
-                    <small>HTML · CSS · JavaScript</small>
-                </article>
-
-            </div>
-
-            <a href="portfolio.html" class="botao">
-                Conheça todos os projetos
-                <i class="fa-solid fa-arrow-right"></i>
-            </a>
-
-        </section>
-
-
-        <!-- CONTATO -->
-        <section class="secao-home contato-home" id="contato">
-
-            <p class="subtitulo">VAMOS CONVERSAR?</p>
-
-            <h2>
-                Vamos construir novas <span>possibilidades.</span>
-            </h2>
-
-            <p>
-                Obrigada por conhecer um pouco do meu trabalho.
-                Entre em contato para conversar ou conhecer melhor
-                meus projetos.
-            </p>
-
-            <a href="https://wa.me/5533999855969"
-                class="botao"
-                target="_blank"
-                rel="noopener noreferrer">
-
-                <i class="fa-brands fa-whatsapp"></i>
-                Conversar pelo WhatsApp
-
-            </a>
-
-        </section>
-
-    </main>
-
-
-    <!-- BOTÃO FLUTUANTE DO WHATSAPP -->
-    <a href="https://wa.me/5533999855969"
-        class="whatsapp-float"
-        target="_blank"
-        rel="noopener noreferrer"
-        aria-label="Conversar pelo WhatsApp">
-
-        <i class="fa-brands fa-whatsapp"></i>
-
-    </a>
-
-
-    <!-- RODAPÉ -->
-    <footer>
-
-        <p>
-            © 2026 Ana Laura Lopes. Todos os direitos reservados.
-        </p>
-
-    </footer>
-
-
-    <script src="java.js"></script>
-
-</body>
-</html>
+        </form>
+    </div>
+</section>
