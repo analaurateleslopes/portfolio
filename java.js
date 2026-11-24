@@ -1,4 +1,3 @@
-
 /* ==========================================
    PORTFÓLIO ANA LAURA
    CONEXÃO E GERENCIAMENTO SUPABASE
@@ -6,6 +5,9 @@
 
 const SUPABASE_URL = "https://alzebirqbhxecbqgcihu.supabase.co";
 const SUPABASE_KEY = "sb_publishable_4UpuzVQxnsT4__guSriaNg_Nt6PVNM3";
+
+// COLOQUE SEU NÚMERO AQUI (Ex: 5511999999999)
+const MEU_WHATSAPP = "5500000000000";
 
 let supabaseApp = null;
 
@@ -161,7 +163,7 @@ async function excluirProjeto(id) {
 }
 
 // ==========================================
-// 9. ENVIAR MENSAGEM DE CONTATO
+// 9. GERENCIAR MENSAGENS (LEADS)
 // ==========================================
 
 async function enviarLead(dados) {
@@ -177,6 +179,36 @@ async function enviarLead(dados) {
     if (error) throw new Error(error.message);
 
     return data;
+}
+
+async function listarLeads() {
+    if (!(await verificarAdministrador())) {
+        throw new Error("Acesso não autorizado.");
+    }
+
+    const { data, error } = await supabaseApp
+        .from("leads")
+        .select("*")
+        .order("created_at", { ascending: false });
+
+    if (error) throw new Error(error.message);
+
+    return data;
+}
+
+async function excluirLead(id) {
+    if (!(await verificarAdministrador())) {
+        throw new Error("Acesso não autorizado.");
+    }
+
+    const { error } = await supabaseApp
+        .from("leads")
+        .delete()
+        .eq("id", id);
+
+    if (error) throw new Error(error.message);
+
+    return true;
 }
 
 // ==========================================
@@ -195,11 +227,13 @@ window.supabaseApp = {
     atualizarProjeto,
     excluirProjeto,
 
-    enviarLead
+    enviarLead,
+    listarLeads,
+    excluirLead
 };
 
 // ==========================================
-// 11. FORMULÁRIO DE CONTATO
+// 11. FORMULÁRIO DE CONTATO + WHATSAPP
 // ==========================================
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -235,10 +269,17 @@ document.addEventListener("DOMContentLoaded", function () {
                 throw new Error("É necessário aceitar a política de privacidade.");
             }
 
+            // 1. Salva no banco de dados (aparece no seu painel adm)
             await enviarLead(dados);
 
-            retorno.textContent = "Mensagem enviada com sucesso!";
+            // 2. Prepara a mensagem e abre seu WhatsApp
+            const textoWhatsApp = `Olá Ana Laura! Vim pelo seu portfólio.%0A%0A*Nome:* ${encodeURIComponent(dados.nome)}%0A*Assunto:* ${encodeURIComponent(dados.assunto)}%0A*Mensagem:* ${encodeURIComponent(dados.mensagem)}`;
+            const linkWhatsApp = `https://wa.me/${MEU_WHATSAPP}?text=${textoWhatsApp}`;
+
+            retorno.textContent = "Mensagem salva! Abrindo o WhatsApp...";
             formulario.reset();
+
+            window.open(linkWhatsApp, "_blank");
 
         } catch (erro) {
             console.error("Erro ao enviar contato:", erro);
