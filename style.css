@@ -1008,3 +1008,131 @@ footer {
     }
 
 }
+
+/* =========================================
+   FORMULÁRIO DE CONTATO
+========================================= */
+
+.form-contato {
+    width: 100%;
+    max-width: 750px;
+    margin: 40px auto 0;
+    padding: 35px;
+    background: var(--claro);
+    border: 1px solid var(--borda);
+    border-radius: 8px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 22px;
+    text-align: left;
+}
+
+.campo-contato {
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+}
+
+.campo-contato label {
+    color: var(--marrom);
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.campo-contato input,
+.campo-contato textarea {
+    width: 100%;
+    padding: 14px;
+    background: var(--fundo);
+    border: 1px solid var(--borda);
+    border-radius: 5px;
+    color: var(--marrom);
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    outline: none;
+    transition: border-color .3s;
+}
+
+.campo-contato input:focus,
+.campo-contato textarea:focus {
+    border-color: var(--destaque);
+}
+
+.campo-contato textarea {
+    resize: vertical;
+    min-height: 130px;
+}
+
+.campo-contato input::placeholder,
+.campo-contato textarea::placeholder {
+    color: #A39A8D;
+}
+
+.campo-completo {
+    grid-column: 1 / -1;
+}
+
+.privacidade {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    text-align: left;
+}
+
+.privacidade input {
+    margin-top: 4px;
+    accent-color: var(--destaque);
+    cursor: pointer;
+}
+
+.privacidade label {
+    color: var(--texto);
+    font-size: 13px;
+    line-height: 1.6;
+    cursor: pointer;
+}
+
+.btn-contato {
+    width: 100%;
+    padding: 16px;
+    background: var(--marrom);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 15px;
+    cursor: pointer;
+    transition: .3s;
+}
+
+.btn-contato:hover {
+    background: #82715D;
+}
+
+.btn-contato:disabled {
+    opacity: .6;
+    cursor: wait;
+}
+
+#retornoContato {
+    color: var(--marrom);
+    font-size: 14px;
+    text-align: center;
+    line-height: 1.6;
+}
+
+/* FORMULÁRIO NO CELULAR */
+
+@media (max-width: 600px) {
+
+    .form-contato {
+        grid-template-columns: 1fr;
+        padding: 22px;
+        gap: 18px;
+    }
+
+    .campo-completo {
+        grid-column: 1;
+    }
+
+}
+
