@@ -201,3 +201,51 @@ window.supabaseApp = {
     excluirProjeto
 
 };
+
+/* =====================================
+   FORMULÁRIO DE CONTATO - SUPABASE
+===================================== */
+
+document.addEventListener("DOMContentLoaded", function () {
+
+    const formulario = document.getElementById("formContato");
+
+    if (!formulario) return;
+
+    formulario.addEventListener("submit", async function (event) {
+        event.preventDefault();
+
+        const retorno = document.getElementById("retornoContato");
+        const botao = formulario.querySelector('button[type="submit"]');
+
+        botao.disabled = true;
+        botao.textContent = "Enviando...";
+
+        try {
+            if (!window.supabaseApp || !window.supabaseApp.enviarLead) {
+                throw new Error("Conexão com o Supabase não encontrada.");
+            }
+
+            await window.supabaseApp.enviarLead({
+                nome: document.getElementById("nome").value.trim(),
+                email: document.getElementById("email").value.trim(),
+                wttszap: document.getElementById("whatsapp").value.trim(),
+                assunto: document.getElementById("assunto").value.trim(),
+                mensagem: document.getElementById("mensagem").value.trim(),
+                "aceitou privacidade": document.getElementById("privacidade").checked
+            });
+
+            retorno.textContent = "Mensagem enviada com sucesso!";
+            formulario.reset();
+
+        } catch (erro) {
+            console.error(erro);
+            retorno.textContent = "Não foi possível enviar. Verifique a conexão e tente novamente.";
+        }
+
+        botao.disabled = false;
+        botao.textContent = "Enviar mensagem";
+    });
+
+});
+
