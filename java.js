@@ -6,8 +6,8 @@
 const SUPABASE_URL = "https://alzebirqbhxecbqgcihu.supabase.co";
 const SUPABASE_KEY = "sb_publishable_4UpuzVQxnsT4__guSriaNg_Nt6PVNM3";
 
-// COLOQUE SEU NÚMERO AQUI (Ex: 5511999999999)
-const MEU_WHATSAPP = "55 33999855969";
+// Número sem espaços para funcionar corretamente no link wa.me
+const MEU_WHATSAPP = "5533999855969";
 
 let supabaseApp = null;
 
@@ -271,8 +271,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
             await enviarLead(dados);
 
-            const textoWhatsApp = `Olá Ana Laura! Vim pelo seu portfólio.%0A%0A*Nome:* ${encodeURIComponent(dados.nome)}%0A*Assunto:* ${encodeURIComponent(dados.assunto)}%0A*Mensagem:* ${encodeURIComponent(dados.mensagem)}`;
-            const linkWhatsApp = `https://wa.me/${MEU_WHATSAPP}?text=${textoWhatsApp}`;
+            const mensagemFormatada = `Olá Ana Laura! Vim pelo seu portfólio.\n\n*Nome:* ${dados.nome}\n*Assunto:* ${dados.assunto}\n*Mensagem:* ${dados.mensagem}`;
+            const linkWhatsApp = `https://wa.me/${MEU_WHATSAPP}?text=${encodeURIComponent(mensagemFormatada)}`;
 
             retorno.textContent = "Mensagem salva! Abrindo o WhatsApp...";
             formulario.reset();
