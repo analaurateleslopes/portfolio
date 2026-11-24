@@ -1,4 +1,180 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
 
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Portfólio | Ana Laura</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+
+<body>
+
+    <!-- MENU PADRÃO DO PORTFÓLIO -->
+    <header class="cabecalho">
+        <div class="container menu">
+
+            <a href="index.html" class="logo">Ana Laura.</a>
+
+            <nav>
+                <a href="index.html">Início</a>
+                <a href="quemsoueu.html">Quem sou eu</a>
+                <a href="portfolio.html">Portfólio</a>
+                <a href="index.html#contato">Contato</a>
+                <a href="login.html" aria-label="Área administrativa">
+                    <i class="fa-solid fa-lock"></i>
+                </a>
+            </nav>
+
+        </div>
+    </header>
+
+    <main class="pagina">
+        <div class="container">
+
+            <section class="titulo-pagina">
+                <p class="subtitulo">MEUS TRABALHOS</p>
+                <h1>Meu <span>portfólio.</span></h1>
+                <p>Conheça alguns dos projetos que desenvolvi durante meus estudos e trabalhos.</p>
+            </section>
+
+            <!-- VITRINE DE PROJETOS (CONECTADA AO PAINEL ADM) -->
+            <section id="vitrineProjetos" class="projetos">
+
+                <article class="projeto-card">
+                    <div class="projeto-imagem">
+                        <i class="fa-solid fa-utensils"></i>
+                    </div>
+                    <h2>Cardápio Digital</h2>
+                    <p>
+                        Projeto de desenvolvimento web com apresentação
+                        de produtos, categorias e carrinho.
+                    </p>
+                    <small style="color: var(--destaque); font-weight: 600;">HTML • CSS • JavaScript</small>
+                </article>
+
+                <article class="projeto-card">
+                    <div class="projeto-imagem">
+                        <i class="fa-solid fa-database"></i>
+                    </div>
+                    <h2>Banco de Dados Escolar</h2>
+                    <p>
+                        Projeto de organização e gerenciamento
+                        de informações utilizando banco de dados.
+                    </p>
+                    <small style="color: var(--destaque); font-weight: 600;">SQL • Supabase</small>
+                </article>
+
+                <article class="projeto-card">
+                    <div class="projeto-imagem">
+                        <i class="fa-solid fa-laptop-code"></i>
+                    </div>
+                    <h2>Site Pessoal</h2>
+                    <p>
+                        Criação de uma página pessoal com informações,
+                        apresentação e identidade visual.
+                    </p>
+                    <small style="color: var(--destaque); font-weight: 600;">HTML • CSS • JavaScript</small>
+                </article>
+
+            </section>
+
+        </div>
+    </main>
+
+    <!-- RODAPÉ -->
+    <footer class="rodape">
+        <div class="container">
+            <p>© 2026 Ana Laura Lopes. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+    <!-- BOTÃO WHATSAPP (Troque SEUNUMERO por 55 + DDD + Número) -->
+    <a href="https://wa.me/SEUNUMERO"
+        class="whatsapp-flutuante"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="Conversar pelo WhatsApp">
+        <i class="fa-brands fa-whatsapp"></i>
+    </a>
+
+    <!-- BIBLIOTECA SUPABASE -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+    <!-- JAVASCRIPT DO PORTFÓLIO -->
+    <script src="java.js"></script>
+
+    <!-- SCRIPT PARA PUXAR PROJETOS DO PAINEL ADM -->
+    <script>
+        function escaparTexto(texto) {
+            return String(texto ?? "").replace(/[&<>"']/g, letra => ({
+                "&": "&amp;",
+                "<": "&lt;",
+                ">": "&gt;",
+                '"': "&quot;",
+                "'": "&#39;"
+            })[letra]);
+        }
+
+        function validarUrl(valor) {
+            try {
+                const url = new URL(valor);
+                if (url.protocol === "https:" || url.protocol === "http:") {
+                    return url.href;
+                }
+            } catch (erro) {}
+            return "";
+        }
+
+        document.addEventListener("DOMContentLoaded", async function () {
+            const vitrine = document.getElementById("vitrineProjetos");
+
+            if (!window.supabaseApp || !vitrine) return;
+
+            try {
+                const projetos = await window.supabaseApp.listarProjetos();
+
+                // Se houver projetos cadastrados no Painel Adm, exibe eles na tela
+                if (projetos && projetos.length > 0) {
+                    vitrine.innerHTML = projetos.map(projeto => {
+                        const imagem = validarUrl(projeto.imagem);
+                        const link = validarUrl(projeto.link);
+
+                        return `
+                            <article class="projeto-card">
+                                <div class="projeto-imagem">
+                                    ${imagem
+                                        ? `<img src="${escaparTexto(imagem)}" alt="${escaparTexto(projeto.titulo)}">`
+                                        : `<i class="fa-solid fa-folder-open"></i>`
+                                    }
+                                </div>
+                                <h2>${escaparTexto(projeto.titulo)}</h2>
+                                <p>${escaparTexto(projeto.descricao)}</p>
+                                ${projeto.categoria
+                                    ? `<small style="color: var(--destaque); font-weight: 600; display: block; margin-bottom: 16px;">${escaparTexto(projeto.categoria)}</small>`
+                                    : ""
+                                }
+                                ${link
+                                    ? `<a href="${escaparTexto(link)}" target="_blank" rel="noopener noreferrer" class="btn-secundario" style="margin-top: auto;">Ver projeto <i class="fa-solid fa-arrow-up-right-from-square" style="margin-left: 6px; font-size: 12px;"></i></a>`
+                                    : ""
+                                }
+                            </article>
+                        `;
+                    }).join("");
+                }
+            } catch (erro) {
+                console.error("Erro ao carregar projetos do banco:", erro);
+            }
+        });
+    </script>
+
+</body>
+</html>
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
