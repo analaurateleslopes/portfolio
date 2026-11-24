@@ -1,62 +1,258 @@
 
-<section id="contato" class="contato-home">
-    <div class="container">
+<!DOCTYPE html>
+<html lang="pt-BR">
 
-        <div class="titulo-secao">
-            <span>FALE COMIGO</span>
-            <h2>Vamos conversar?</h2>
-            <p>Preencha o formulário abaixo. Sua mensagem será enviada diretamente para meu painel.</p>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Ana Laura | Portfólio</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+
+<body>
+
+    <!-- MENU -->
+    <header class="cabecalho">
+        <div class="container menu">
+
+            <a href="index.html" class="logo">Ana Laura.</a>
+
+            <nav>
+                <a href="index.html">Início</a>
+                <a href="quemsoueu.html">Quem sou eu</a>
+                <a href="portfolio.html">Portfólio</a>
+                <a href="#contato">Contato</a>
+                <a href="login.html" aria-label="Área administrativa">
+                    <i class="fa-solid fa-lock"></i>
+                </a>
+            </nav>
+
         </div>
+    </header>
 
-        <form id="formContato" class="form-contato">
+    <main>
 
-            <div class="campo-contato">
-                <label for="nome">Nome completo</label>
-                <input type="text" id="nome" name="nome"
-                    placeholder="Digite seu nome" required>
+        <!-- INÍCIO -->
+        <section class="inicio">
+            <div class="container inicio-conteudo">
+
+                <div class="inicio-texto">
+                    <span>PORTFÓLIO PESSOAL</span>
+
+                    <h1>Olá, eu sou <strong>Ana Laura</strong></h1>
+
+                    <h2>Estudante de Tecnologia da Informação</h2>
+
+                    <p>
+                        Seja bem-vindo ao meu espaço profissional.
+                        Aqui compartilho meus conhecimentos, projetos
+                        e minha evolução na área da tecnologia.
+                    </p>
+
+                    <div class="botoes-inicio">
+                        <a href="quemsoueu.html" class="btn">
+                            Conheça minha história
+                        </a>
+
+                        <a href="portfolio.html" class="btn-secundario">
+                            Ver projetos
+                        </a>
+                    </div>
+                </div>
+
+                <div class="foto-placeholder">
+                    <i class="fa-regular fa-user"></i>
+                    <p>Espaço para minha foto</p>
+                </div>
+
             </div>
+        </section>
 
-            <div class="campo-contato">
-                <label for="email">E-mail</label>
-                <input type="email" id="email" name="email"
-                    placeholder="seuemail@exemplo.com" required>
+        <!-- SOBRE -->
+        <section class="sobre-home">
+            <div class="container">
+
+                <div class="titulo-secao">
+                    <span>UM POUCO SOBRE MIM</span>
+                    <h2>Conheça minha trajetória</h2>
+                </div>
+
+                <p>
+                    Sou estudante de Tecnologia da Informação e tenho
+                    interesse em desenvolvimento web, tecnologia e
+                    criação de soluções digitais. Estou sempre buscando
+                    aprender e desenvolver novas habilidades.
+                </p>
+
+                <a href="quemsoueu.html" class="btn">
+                    Saiba mais
+                </a>
+
             </div>
+        </section>
 
-            <div class="campo-contato">
-                <label for="whatsapp">WhatsApp</label>
-                <input type="tel" id="whatsapp" name="whatsapp"
-                    placeholder="(00) 00000-0000" required>
+        <!-- HABILIDADES -->
+        <section class="habilidades">
+            <div class="container">
+
+                <div class="titulo-secao">
+                    <span>CONHECIMENTOS</span>
+                    <h2>Minhas habilidades</h2>
+                </div>
+
+                <div class="habilidades-grid">
+                    <div class="habilidade">HTML</div>
+                    <div class="habilidade">CSS</div>
+                    <div class="habilidade">JavaScript</div>
+                    <div class="habilidade">SQL</div>
+                    <div class="habilidade">Excel</div>
+                    <div class="habilidade">GitHub</div>
+                </div>
+
             </div>
+        </section>
 
-            <div class="campo-contato">
-                <label for="assunto">Assunto</label>
-                <input type="text" id="assunto" name="assunto"
-                    placeholder="Sobre o que deseja conversar?" required>
+        <!-- PROJETOS -->
+        <section class="projetos-home">
+            <div class="container">
+
+                <div class="titulo-secao">
+                    <span>MEUS TRABALHOS</span>
+                    <h2>Projetos em destaque</h2>
+                </div>
+
+                <div class="projetos-grid">
+
+                    <article class="projeto-card">
+                        <div class="projeto-imagem">
+                            <i class="fa-regular fa-image"></i>
+                        </div>
+                        <h3>Cardápio Digital</h3>
+                        <p>Projeto de criação de um cardápio digital.</p>
+                    </article>
+
+                    <article class="projeto-card">
+                        <div class="projeto-imagem">
+                            <i class="fa-regular fa-image"></i>
+                        </div>
+                        <h3>Banco de Dados Escolar</h3>
+                        <p>Projeto envolvendo organização de dados.</p>
+                    </article>
+
+                    <article class="projeto-card">
+                        <div class="projeto-imagem">
+                            <i class="fa-regular fa-image"></i>
+                        </div>
+                        <h3>Site Pessoal</h3>
+                        <p>Desenvolvimento do meu portfólio profissional.</p>
+                    </article>
+
+                </div>
+
+                <a href="portfolio.html" class="btn">
+                    Ver todos os projetos
+                </a>
+
             </div>
+        </section>
 
-            <div class="campo-contato campo-completo">
-                <label for="mensagem">Mensagem</label>
-                <textarea id="mensagem" name="mensagem"
-                    placeholder="Escreva sua mensagem..." rows="5"
-                    required></textarea>
+        <!-- CONTATO COM FORMULÁRIO -->
+        <section id="contato" class="contato-home">
+            <div class="container">
+
+                <div class="titulo-secao">
+                    <span>FALE COMIGO</span>
+                    <h2>Vamos conversar?</h2>
+                    <p>
+                        Preencha o formulário abaixo.
+                        Sua mensagem será enviada diretamente para meu painel.
+                    </p>
+                </div>
+
+                <form id="formContato" class="form-contato">
+
+                    <div class="campo-contato">
+                        <label for="nome">Nome completo</label>
+                        <input type="text" id="nome" name="nome"
+                            placeholder="Digite seu nome" required>
+                    </div>
+
+                    <div class="campo-contato">
+                        <label for="email">E-mail</label>
+                        <input type="email" id="email" name="email"
+                            placeholder="seuemail@exemplo.com" required>
+                    </div>
+
+                    <div class="campo-contato">
+                        <label for="whatsapp">WhatsApp</label>
+                        <input type="tel" id="whatsapp" name="whatsapp"
+                            placeholder="(00) 00000-0000" required>
+                    </div>
+
+                    <div class="campo-contato">
+                        <label for="assunto">Assunto</label>
+                        <input type="text" id="assunto" name="assunto"
+                            placeholder="Sobre o que deseja conversar?" required>
+                    </div>
+
+                    <div class="campo-contato campo-completo">
+                        <label for="mensagem">Mensagem</label>
+                        <textarea id="mensagem" name="mensagem"
+                            placeholder="Escreva sua mensagem..."
+                            rows="5" required></textarea>
+                    </div>
+
+                    <div class="privacidade campo-completo">
+                        <input type="checkbox" id="privacidade"
+                            name="privacidade" required>
+
+                        <label for="privacidade">
+                            Autorizo o envio e armazenamento dos meus dados
+                            para que Ana Laura possa responder meu contato.
+                        </label>
+                    </div>
+
+                    <button type="submit"
+                        class="btn-contato campo-completo">
+                        Enviar mensagem
+                    </button>
+
+                    <p id="retornoContato"
+                        class="campo-completo"
+                        aria-live="polite"></p>
+
+                </form>
             </div>
+        </section>
 
-            <div class="privacidade campo-completo">
-                <input type="checkbox" id="privacidade"
-                    name="privacidade" required>
-                <label for="privacidade">
-                    Autorizo o envio e armazenamento dos meus dados
-                    para que Ana Laura possa responder meu contato.
-                </label>
-            </div>
+    </main>
 
-            <button type="submit" class="btn-contato campo-completo">
-                Enviar mensagem
-            </button>
+    <!-- RODAPÉ -->
+    <footer class="rodape">
+        <div class="container">
+            <p>© 2026 Ana Laura. Todos os direitos reservados.</p>
+        </div>
+    </footer>
 
-            <p id="retornoContato" class="campo-completo"
-                aria-live="polite"></p>
+    <!-- BOTÃO WHATSAPP -->
+    <a href="https://wa.me/SEUNUMERO"
+        class="whatsapp-flutuante"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="Conversar pelo WhatsApp">
+        <i class="fa-brands fa-whatsapp"></i>
+    </a>
 
-        </form>
-    </div>
-</section>
+    <!-- BIBLIOTECA SUPABASE -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+    <!-- JAVASCRIPT DO PORTFÓLIO -->
+    <script src="java.js"></script>
+
+</body>
+</html>
