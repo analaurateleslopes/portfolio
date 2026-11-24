@@ -1,32 +1,212 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+
 :root {
-    --fundo: #FAF7FF;
-    --fundo-secundario: #F3ECFF;
-    --cartao: #FFFFFF;
-    --cartao-hover: #FFF5F7;
-    --roxo: #7C3AED;
-    --ciano: #F43F5E; /* Aqui faz o papel do Rosa/Coral vibrante */
-    --gradiente: linear-gradient(135deg, #7C3AED 0%, #F43F5E 100%);
-    --titulo: #1E1035;
-    --texto: #5B4E70;
-    --borda: rgba(124, 58, 237, 0.16);
-    --borda-brilho: rgba(244, 63, 94, 0.45);
-    --sombra-neon: 0 14px 32px rgba(124, 58, 237, 0.14);
+    --fundo: #0b0f19;
+    --fundo-secundario: #111827;
+    --cartao: #161e31;
+    --cartao-hover: #1e293b;
+    --roxo: #7c3aed;
+    --ciano: #38bdf8;
+    --gradiente: linear-gradient(135deg, #7c3aed 0%, #38bdf8 100%);
+    --titulo: #f8fafc;
+    --texto: #94a3b8;
+    --borda: rgba(56, 189, 248, 0.25);
+    --sombra-neon: 0 0 25px rgba(56, 189, 248, 0.2);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
 }
 
 body {
-    background: var(--fundo);
-    background-image:
-        radial-gradient(circle at 12% 15%, rgba(124, 58, 237, 0.08) 0%, transparent 45%),
-        radial-gradient(circle at 88% 25%, rgba(244, 63, 94, 0.08) 0%, transparent 45%);
+    background-color: var(--fundo);
+    background-image: 
+        radial-gradient(circle at 15% 15%, rgba(124, 58, 237, 0.15) 0%, transparent 45%),
+        radial-gradient(circle at 85% 25%, rgba(56, 189, 248, 0.12) 0%, transparent 45%);
     color: var(--titulo);
     font-family: 'Plus Jakarta Sans', Arial, sans-serif;
     line-height: 1.6;
-    -webkit-font-smoothing: antialiased;
 }
-/* Ajuste da foto dentro da moldura */
+
+.container {
+    width: 90%;
+    max-width: 1140px;
+    margin: 0 auto;
+}
+
+/* CABEÇALHO E MENU */
+.cabecalho {
+    padding: 20px 0;
+    position: sticky;
+    top: 0;
+    background: rgba(11, 15, 25, 0.85);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    z-index: 100;
+}
+
+.menu {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-size: 1.4rem;
+    font-weight: 800;
+    color: var(--ciano);
+    text-decoration: none;
+}
+
+.menu nav {
+    display: flex;
+    align-items: center;
+    gap: 28px;
+}
+
+.menu nav a {
+    color: var(--texto);
+    text-decoration: none;
+    font-size: 0.95rem;
+    font-weight: 500;
+    transition: color 0.3s;
+}
+
+.menu nav a:hover {
+    color: var(--ciano);
+}
+
+/* SEÇÃO INÍCIO (HERO) */
+.inicio {
+    padding: 90px 0;
+    min-height: 85vh;
+    display: flex;
+    align-items: center;
+}
+
+.inicio-conteudo {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 50px;
+}
+
+.inicio-texto {
+    max-width: 600px;
+}
+
+.inicio-texto span,
+.titulo-secao span {
+    display: inline-block;
+    color: var(--ciano);
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+}
+
+.inicio-texto h1 {
+    font-size: 3rem;
+    font-weight: 800;
+    line-height: 1.2;
+    margin-bottom: 10px;
+}
+
+.inicio-texto h1 strong {
+    background: var(--gradiente);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.inicio-texto h2 {
+    font-size: 1.25rem;
+    color: var(--ciano);
+    font-weight: 500;
+    margin-bottom: 20px;
+}
+
+.inicio-texto p {
+    color: var(--texto);
+    margin-bottom: 32px;
+    font-size: 1rem;
+}
+
+.botoes-inicio {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+}
+
+/* BOTÕES */
+.btn {
+    display: inline-block;
+    padding: 13px 28px;
+    background: var(--gradiente);
+    color: #ffffff;
+    font-weight: 600;
+    font-size: 0.95rem;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: transform 0.2s, box-shadow 0.2s;
+    border: none;
+    cursor: pointer;
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(124, 58, 237, 0.35);
+}
+
+.btn-secundario {
+    display: inline-block;
+    padding: 13px 28px;
+    background: rgba(255, 255, 255, 0.04);
+    color: var(--titulo);
+    font-weight: 600;
+    font-size: 0.95rem;
+    border-radius: 8px;
+    text-decoration: none;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    transition: background 0.2s, border-color 0.2s;
+}
+
+.btn-secundario:hover {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: var(--ciano);
+}
+
+/* MOLDURA DA FOTO */
 .foto-placeholder {
+    width: 320px;
+    height: 360px;
+    border-radius: 20px;
+    border: 1.5px solid var(--ciano);
+    background: rgba(22, 30, 49, 0.6);
+    box-shadow: var(--sombra-neon);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: var(--texto);
     overflow: hidden;
-    padding: 0; /* Remove espaçamento interno para a foto encostar nas bordas */
+    flex-shrink: 0;
+}
+
+.foto-placeholder i {
+    font-size: 3rem;
+    color: var(--ciano);
+    margin-bottom: 12px;
+}
+
+.foto-placeholder p {
+    font-size: 0.85rem;
 }
 
 .foto-perfil {
@@ -34,11 +214,236 @@ body {
     height: 100%;
     object-fit: cover;
     display: block;
-    border-radius: inherit;
 }
 
-/* Espaçamento das novas seções igual às existentes */
-.formacao-home,
-.diferenciais-home {
+/* SEÇÕES GERAIS */
+.sobre-home,
+.habilidades,
+.projetos-home,
+.contato-home {
     padding: 80px 0;
+}
+
+.sobre-home {
+    background-color: var(--fundo-secundario);
+}
+
+.titulo-secao {
+    margin-bottom: 35px;
+}
+
+.titulo-secao h2 {
+    font-size: 2rem;
+    font-weight: 700;
+}
+
+.titulo-secao p {
+    color: var(--texto);
+    margin-top: 10px;
+}
+
+.sobre-home p {
+    color: var(--texto);
+    max-width: 720px;
+    margin-bottom: 28px;
+}
+
+/* HABILIDADES */
+.habilidades-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 18px;
+}
+
+.habilidade {
+    background: var(--cartao);
+    border: 1px solid var(--borda);
+    padding: 20px;
+    border-radius: 12px;
+    text-align: center;
+    font-weight: 600;
+    color: var(--titulo);
+    transition: transform 0.2s, border-color 0.2s;
+}
+
+.habilidade:hover {
+    transform: translateY(-4px);
+    border-color: var(--ciano);
+}
+
+/* PROJETOS */
+.projetos-home {
+    background-color: var(--fundo-secundario);
+}
+
+.projetos-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 24px;
+    margin-bottom: 35px;
+}
+
+.projeto-card {
+    background: var(--cartao);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 16px;
+    padding: 22px;
+    transition: transform 0.2s, border-color 0.2s;
+}
+
+.projeto-card:hover {
+    transform: translateY(-5px);
+    border-color: var(--ciano);
+}
+
+.projeto-imagem {
+    height: 150px;
+    background: var(--fundo);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 18px;
+    color: var(--ciano);
+    font-size: 2rem;
+}
+
+.projeto-card h3 {
+    font-size: 1.2rem;
+    margin-bottom: 8px;
+}
+
+.projeto-card p {
+    color: var(--texto);
+    font-size: 0.92rem;
+}
+
+/* FORMULÁRIO DE CONTATO */
+.form-contato {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    background: var(--cartao);
+    padding: 32px;
+    border-radius: 16px;
+    border: 1px solid var(--borda);
+}
+
+.campo-contato {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.campo-completo {
+    grid-column: 1 / -1;
+}
+
+.campo-contato label {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--titulo);
+}
+
+.campo-contato input,
+.campo-contato textarea {
+    background: var(--fundo);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    padding: 12px 14px;
+    color: var(--titulo);
+    font-family: inherit;
+    font-size: 0.95rem;
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+.campo-contato input:focus,
+.campo-contato textarea:focus {
+    border-color: var(--ciano);
+}
+
+.privacidade {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    font-size: 0.85rem;
+    color: var(--texto);
+}
+
+.privacidade input {
+    margin-top: 4px;
+}
+
+.btn-contato {
+    padding: 14px;
+    background: var(--gradiente);
+    color: #fff;
+    font-weight: 700;
+    font-size: 1rem;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: opacity 0.2s;
+}
+
+.btn-contato:hover {
+    opacity: 0.9;
+}
+
+/* RODAPÉ E WHATSAPP */
+.rodape {
+    padding: 25px 0;
+    text-align: center;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    color: var(--texto);
+    font-size: 0.9rem;
+}
+
+.whatsapp-flutuante {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    width: 56px;
+    height: 56px;
+    background-color: #25d366;
+    color: #ffffff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.8rem;
+    box-shadow: 0 6px 18px rgba(37, 211, 102, 0.4);
+    text-decoration: none;
+    z-index: 200;
+    transition: transform 0.2s;
+}
+
+.whatsapp-flutuante:hover {
+    transform: scale(1.08);
+}
+
+/* RESPONSIVO PARA CELULAR */
+@media (max-width: 768px) {
+    .inicio-conteudo {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .botoes-inicio {
+        justify-content: center;
+    }
+
+    .foto-placeholder {
+        width: 260px;
+        height: 300px;
+    }
+
+    .form-contato {
+        grid-template-columns: 1fr;
+    }
+
+    .menu nav {
+        gap: 14px;
+    }
 }
