@@ -58,7 +58,6 @@ body {
     z-index: 100;
 }
 
-/* Suporte tanto para o index (.menu) quanto para páginas internas */
 .cabecalho .menu,
 .cabecalho:not(:has(.menu)) {
     display: flex;
@@ -258,14 +257,12 @@ h2 span {
     flex-wrap: wrap;
 }
 
-/* MOLDURA DA FOTO */
-
 .foto-placeholder {
     width: 330px;
     height: 410px;
     background: var(--cartao);
     border: 1px solid var(--borda);
-    border-radius: 160px 160px 12px 12px; /* Formato arco elegante */
+    border-radius: 160px 160px 12px 12px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -320,7 +317,7 @@ h2 span {
 }
 
 /* =========================================
-   HABILIDADES (BADGES MODERNOS)
+   HABILIDADES
 ========================================= */
 
 .habilidades {
