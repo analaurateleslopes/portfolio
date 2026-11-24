@@ -269,10 +269,8 @@ document.addEventListener("DOMContentLoaded", function () {
                 throw new Error("É necessário aceitar a política de privacidade.");
             }
 
-            // 1. Salva no banco de dados (aparece no seu painel adm)
             await enviarLead(dados);
 
-            // 2. Prepara a mensagem e abre seu WhatsApp
             const textoWhatsApp = `Olá Ana Laura! Vim pelo seu portfólio.%0A%0A*Nome:* ${encodeURIComponent(dados.nome)}%0A*Assunto:* ${encodeURIComponent(dados.assunto)}%0A*Mensagem:* ${encodeURIComponent(dados.mensagem)}`;
             const linkWhatsApp = `https://wa.me/${MEU_WHATSAPP}?text=${textoWhatsApp}`;
 
