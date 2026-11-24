@@ -1,76 +1,112 @@
-
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sobre mim | Ana Laura</title>
+
+    <title>Quem sou eu | Ana Laura</title>
+
     <link rel="stylesheet" href="style.css">
+
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
+
 <body>
 
-<header class="cabecalho">
-    <a href="index.html" class="logo">ana laura.</a>
+    <!-- MENU PADRÃO DO PORTFÓLIO -->
+    <header class="cabecalho">
+        <div class="container menu">
 
-    <nav>
-        <a href="index.html">Início</a>
-        <a href="quemsoueu.html">Sobre mim</a>
-        <a href="portfolio.html">Portfólio</a>
-        <a href="index.html#contato">Contato</a>
-        <a href="login.html" class="cadeado" aria-label="Área restrita">🔒</a>
-    </nav>
-</header>
+            <a href="index.html" class="logo">Ana Laura.</a>
 
-<main class="pagina">
-    <section class="titulo-pagina">
-        <p class="subtitulo">UM POUCO DA MINHA HISTÓRIA</p>
-        <h1>Quem sou <span>eu?</span></h1>
-    </section>
+            <nav>
+                <a href="index.html">Início</a>
+                <a href="quemsoueu.html">Quem sou eu</a>
+                <a href="portfolio.html">Portfólio</a>
+                <a href="index.html#contato">Contato</a>
+                <a href="login.html" aria-label="Área administrativa">
+                    <i class="fa-solid fa-lock"></i>
+                </a>
+            </nav>
 
-    <section class="sobre-conteudo">
-        <div class="sobre-foto">
-            <i class="fa-regular fa-user"></i>
-            <p>Sua foto aqui</p>
         </div>
+    </header>
 
-        <div class="sobre-texto">
-            <h2>Olá, seja bem-vindo(a)!</h2>
+    <main class="pagina">
+        <div class="container">
 
-            <p>
-                Meu nome é Ana Laura e sou estudante do ensino médio
-                e do curso de Tecnologia da Informação.
-            </p>
+            <section class="titulo-pagina">
+                <p class="subtitulo">UM POUCO DA MINHA HISTÓRIA</p>
+                <h1>Quem sou <span>eu?</span></h1>
+            </section>
 
-            <p>
-                Tenho interesse pela área de tecnologia, principalmente
-                pelo desenvolvimento de sites e pela criação de projetos
-                digitais.
-            </p>
+            <section class="sobre-conteudo">
+                <div class="sobre-foto">
+                    <i class="fa-regular fa-user"></i>
+                    <p>Espaço para minha foto</p>
+                </div>
 
-            <p>
-                Estou sempre buscando aprender coisas novas, desenvolver
-                minhas habilidades e adquirir experiências que contribuam
-                para meu futuro profissional.
-            </p>
+                <div class="sobre-texto">
+                    <h2>Olá, seja bem-vindo(a)!</h2>
 
-            <h3>Meus objetivos</h3>
+                    <p>
+                        Meu nome é Ana Laura e sou estudante do ensino médio
+                        e do curso de Tecnologia da Informação.
+                    </p>
 
-            <p>
-                Quero continuar estudando, aperfeiçoar meus conhecimentos
-                em tecnologia e construir uma trajetória profissional
-                com dedicação e responsabilidade.
-            </p>
+                    <p>
+                        Tenho interesse pela área de tecnologia, principalmente
+                        pelo desenvolvimento de sites e pela criação de projetos
+                        digitais que unam organização, funcionalidade e um visual agradável.
+                    </p>
+
+                    <p>
+                        Estou sempre buscando aprender coisas novas, desenvolver
+                        minhas habilidades e adquirir experiências que contribuam
+                        para meu futuro profissional.
+                    </p>
+
+                    <h3>Meus objetivos</h3>
+
+                    <p>
+                        Quero continuar estudando, aperfeiçoar meus conhecimentos
+                        em tecnologia e construir uma trajetória profissional
+                        com dedicação e responsabilidade.
+                    </p>
+
+                    <div class="botoes-inicio" style="margin-top: 28px;">
+                        <a href="portfolio.html" class="btn">Ver meus projetos</a>
+                        <a href="index.html#contato" class="btn-secundario">Entrar em contato</a>
+                    </div>
+                </div>
+            </section>
+
         </div>
-    </section>
-</main>
+    </main>
 
-<footer>
-    <p>© 2026 Ana Laura Lopes. Todos os direitos reservados.</p>
-</footer>
+    <!-- RODAPÉ -->
+    <footer class="rodape">
+        <div class="container">
+            <p>© 2026 Ana Laura Lopes. Todos os direitos reservados.</p>
+        </div>
+    </footer>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/js/all.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="script.js"></script>
+    <!-- BOTÃO WHATSAPP (Troque SEUNUMERO por 55 + DDD + Número) -->
+    <a href="https://wa.me/SEUNUMERO"
+        class="whatsapp-flutuante"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="Conversar pelo WhatsApp">
+        <i class="fa-brands fa-whatsapp"></i>
+    </a>
+
+    <!-- BIBLIOTECA SUPABASE -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+    <!-- JAVASCRIPT DO PORTFÓLIO -->
+    <script src="java.js"></script>
 
 </body>
 </html>
