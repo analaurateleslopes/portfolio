@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="pt-BR">
 
@@ -56,6 +55,11 @@
             cursor: pointer;
             background: #514B43;
             color: white;
+            text-decoration: none;
+            font-size: 14px;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
         }
 
         .gerenciar-form button {
@@ -71,6 +75,7 @@
             display: grid;
             grid-template-columns: repeat(2, 1fr);
             gap: 20px;
+            margin-bottom: 50px;
         }
 
         .item-projeto {
@@ -96,15 +101,18 @@
         .item-projeto p {
             color: #696258;
             line-height: 1.7;
-            margin-bottom: 12px;
+            margin-bottom: 10px;
         }
 
         .item-projeto small {
             color: #927D66;
+            display: block;
+            margin-bottom: 8px;
         }
 
         .acoes-projeto {
             display: flex;
+            flex-wrap: wrap;
             gap: 10px;
             margin-top: 18px;
         }
@@ -115,6 +123,10 @@
 
         .acao-excluir {
             background: #8B4038;
+        }
+
+        .acao-whatsapp {
+            background: #2E6F40;
         }
 
         #statusProjetos {
@@ -163,13 +175,29 @@
 
             <p>
                 Bem-vinda, Ana Laura!
-                Gerencie os projetos do seu portfólio.
+                Gerencie os projetos e as mensagens do seu portfólio.
             </p>
 
         </section>
 
         <div class="gerenciar-area">
 
+            <!-- SEÇÃO DE MENSAGENS RECEBIDAS -->
+            <section>
+
+                <div class="titulo-pagina">
+                    <p class="subtitulo">CONTATOS DO SITE</p>
+                    <h2>Mensagens recebidas</h2>
+                    <p>Clientes e visitantes que preencheram o formulário.</p>
+                </div>
+
+                <div id="listaMensagens" class="lista-projetos">
+                    <p>Carregando mensagens...</p>
+                </div>
+
+            </section>
+
+            <!-- FORMULÁRIO DE PROJETOS -->
             <section class="gerenciar-form">
 
                 <p class="subtitulo">GERENCIAMENTO</p>
@@ -232,6 +260,7 @@
 
             </section>
 
+            <!-- LISTA DE PROJETOS -->
             <section>
 
                 <div class="titulo-pagina">
@@ -266,6 +295,7 @@
 
         const formulario = document.getElementById("formProjeto");
         const lista = document.getElementById("listaProjetos");
+        const listaMensagens = document.getElementById("listaMensagens");
         const status = document.getElementById("statusProjetos");
 
         const botaoSalvar = document.getElementById("botaoSalvar");
@@ -289,7 +319,10 @@
                     return;
                 }
 
-                await carregarProjetos();
+                await Promise.all([
+                    carregarMensagens(),
+                    carregarProjetos()
+                ]);
 
             } catch (erro) {
 
@@ -329,6 +362,98 @@
             return "";
 
         }
+
+        // CARREGAR MENSAGENS (LEADS)
+
+        async function carregarMensagens() {
+
+            listaMensagens.innerHTML = "<p>Carregando mensagens...</p>";
+
+            try {
+
+                const mensagens = await window.supabaseApp.listarLeads();
+
+                if (!mensagens.length) {
+                    listaMensagens.innerHTML = `
+                        <p>Nenhuma mensagem recebida ainda.</p>
+                    `;
+                    return;
+                }
+
+                listaMensagens.innerHTML = mensagens.map(lead => {
+
+                    const numeroLimpo = String(lead.wttszap || "").replace(/\D/g, "");
+                    const linkZapCliente = numeroLimpo
+                        ? `https://wa.me/55${numeroLimpo}?text=${encodeURIComponent(`Olá ${lead.nome}, recebi sua mensagem no meu portfólio sobre "${lead.assunto}"!`)}`
+                        : "";
+
+                    const dataFormatada = lead.created_at
+                        ? new Date(lead.created_at).toLocaleString("pt-BR")
+                        : "";
+
+                    return `
+                        <article class="item-projeto">
+                            <small>${escapar(dataFormatada)}</small>
+                            <h3>${escapar(lead.nome)}</h3>
+                            <p><strong>Assunto:</strong> ${escapar(lead.assunto)}</p>
+                            <p><strong>E-mail:</strong> ${escapar(lead.email)}</p>
+                            <p><strong>WhatsApp:</strong> ${escapar(lead.wttszap || "Não informado")}</p>
+                            <p>${escapar(lead.mensagem)}</p>
+
+                            <div class="acoes-projeto">
+                                ${linkZapCliente ? `
+                                    <a href="${escapar(linkZapCliente)}"
+                                       target="_blank"
+                                       rel="noopener noreferrer"
+                                       class="acao-projeto acao-whatsapp">
+                                       <i class="fa-brands fa-whatsapp"></i> Responder
+                                    </a>
+                                ` : ""}
+
+                                <button
+                                    type="button"
+                                    class="acao-projeto acao-excluir"
+                                    data-excluir-lead="${Number(lead.id)}">
+                                    Excluir
+                                </button>
+                            </div>
+                        </article>
+                    `;
+
+                }).join("");
+
+            } catch (erro) {
+
+                console.error(erro);
+                listaMensagens.innerHTML = `
+                    <p>Não foi possível carregar as mensagens.</p>
+                `;
+
+            }
+
+        }
+
+        // EXCLUIR MENSAGEM
+
+        listaMensagens.addEventListener("click", async function(evento) {
+
+            const excluirLeadBtn = evento.target.closest("[data-excluir-lead]");
+
+            if (excluirLeadBtn) {
+
+                const confirmar = confirm("Deseja excluir esta mensagem?");
+                if (!confirmar) return;
+
+                try {
+                    await window.supabaseApp.excluirLead(Number(excluirLeadBtn.dataset.excluirLead));
+                    await carregarMensagens();
+                } catch (erro) {
+                    alert("Erro ao excluir mensagem: " + erro.message);
+                }
+
+            }
+
+        });
 
         // CARREGAR PROJETOS
 
@@ -490,7 +615,7 @@
 
         });
 
-        // CLIQUES DE EDITAR E EXCLUIR
+        // CLIQUES DE EDITAR E EXCLUIR PROJETO
 
         lista.addEventListener("click", async function(evento) {
 
