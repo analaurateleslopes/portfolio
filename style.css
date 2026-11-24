@@ -1,9 +1,9 @@
 /* =========================================
    PORTFÓLIO ANA LAURA
-   ESTILO EDITORIAL & SOFISTICADO
+   DARK MODE TECH (ROXO NEON & CIANO)
 ========================================= */
 
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
 
 * {
     margin: 0;
@@ -16,21 +16,26 @@ html {
 }
 
 :root {
-    --fundo: #F3F0E9;
-    --cartao: #EAE4D8;
-    --marrom: #3E3932;
-    --marrom-suave: #514B43;
-    --destaque: #9A8065;
-    --destaque-hover: #7D664E;
-    --texto: #635C52;
-    --borda: #DCD4C6;
-    --claro: #FAF8F5;
-    --sombra: 0 12px 32px rgba(62, 57, 50, 0.06);
+    --fundo: #090D16;
+    --fundo-secundario: #0F1624;
+    --cartao: #131B2E;
+    --cartao-hover: #18233C;
+    --roxo: #8B5CF6;
+    --ciano: #06B6D4;
+    --gradiente: linear-gradient(135deg, #8B5CF6 0%, #06B6D4 100%);
+    --titulo: #F8FAFC;
+    --texto: #94A3B8;
+    --borda: rgba(139, 92, 246, 0.22);
+    --borda-brilho: rgba(6, 182, 212, 0.55);
+    --sombra-neon: 0 12px 35px rgba(139, 92, 246, 0.22);
 }
 
 body {
     background: var(--fundo);
-    color: var(--marrom);
+    background-image:
+        radial-gradient(circle at 15% 15%, rgba(139, 92, 246, 0.14) 0%, transparent 40%),
+        radial-gradient(circle at 85% 30%, rgba(6, 182, 212, 0.12) 0%, transparent 40%);
+    color: var(--titulo);
     font-family: 'Plus Jakarta Sans', Arial, sans-serif;
     line-height: 1.6;
     -webkit-font-smoothing: antialiased;
@@ -49,10 +54,10 @@ body {
 
 .cabecalho {
     width: 100%;
-    padding: 22px 0;
+    padding: 20px 0;
     border-bottom: 1px solid var(--borda);
-    background: rgba(243, 240, 233, 0.9);
-    backdrop-filter: blur(10px);
+    background: rgba(9, 13, 22, 0.85);
+    backdrop-filter: blur(14px);
     position: sticky;
     top: 0;
     z-index: 100;
@@ -66,14 +71,16 @@ body {
 }
 
 .cabecalho:not(:has(.menu)) {
-    padding: 22px 8%;
+    padding: 20px 8%;
 }
 
 .logo {
-    font-family: 'Playfair Display', Georgia, serif;
+    font-family: 'Space Grotesk', sans-serif;
     font-size: 26px;
     font-weight: 700;
-    color: var(--marrom);
+    background: var(--gradiente);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
     text-decoration: none;
     letter-spacing: -0.5px;
 }
@@ -81,12 +88,12 @@ body {
 nav {
     display: flex;
     align-items: center;
-    gap: 32px;
+    gap: 30px;
 }
 
 nav a {
     text-decoration: none;
-    color: var(--marrom-suave);
+    color: var(--texto);
     font-size: 14px;
     font-weight: 500;
     position: relative;
@@ -97,15 +104,16 @@ nav a::after {
     content: "";
     position: absolute;
     left: 0;
-    bottom: -4px;
+    bottom: -5px;
     width: 0;
-    height: 1.5px;
-    background: var(--destaque);
+    height: 2px;
+    background: var(--gradiente);
+    border-radius: 2px;
     transition: width 0.3s ease;
 }
 
 nav a:hover {
-    color: var(--destaque);
+    color: var(--titulo);
 }
 
 nav a:hover::after {
@@ -120,8 +128,8 @@ nav a:hover::after {
 .titulo-secao span,
 .inicio-texto > span {
     display: inline-block;
-    color: var(--destaque);
-    font-size: 11px;
+    color: var(--ciano);
+    font-size: 12px;
     font-weight: 700;
     letter-spacing: 3px;
     text-transform: uppercase;
@@ -129,23 +137,24 @@ nav a:hover::after {
 }
 
 h1, h2, h3 {
-    font-family: 'Playfair Display', Georgia, serif;
-    color: var(--marrom);
-    font-weight: 600;
+    font-family: 'Space Grotesk', sans-serif;
+    color: var(--titulo);
+    font-weight: 700;
 }
 
 h1 {
     font-size: 52px;
     line-height: 1.15;
     margin-bottom: 16px;
-    letter-spacing: -0.5px;
+    letter-spacing: -1px;
 }
 
 h1 strong,
 h1 span,
 h2 span {
-    color: var(--destaque);
-    font-weight: 600;
+    background: var(--gradiente);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
 
 .titulo-secao {
@@ -154,7 +163,7 @@ h2 span {
 
 .titulo-secao h2 {
     font-size: 36px;
-    margin-bottom: 14px;
+    margin-bottom: 12px;
 }
 
 .titulo-secao p {
@@ -164,7 +173,7 @@ h2 span {
 }
 
 /* =========================================
-   BOTÕES
+   BOTÕES COM DEGRADÊ NEON
 ========================================= */
 
 .btn,
@@ -174,45 +183,46 @@ h2 span {
     justify-content: center;
     gap: 8px;
     padding: 14px 28px;
-    background: var(--marrom);
-    color: var(--claro);
-    border-radius: 6px;
+    background: var(--gradiente);
+    color: #FFFFFF;
+    border-radius: 8px;
     text-decoration: none;
     font-size: 14px;
-    font-weight: 500;
+    font-weight: 600;
     letter-spacing: 0.3px;
-    border: 1px solid var(--marrom);
+    border: none;
+    box-shadow: 0 6px 22px rgba(139, 92, 246, 0.35);
     transition: all 0.3s ease;
 }
 
 .btn:hover,
 .botao:hover {
-    background: var(--destaque);
-    border-color: var(--destaque);
-    transform: translateY(-2px);
-    box-shadow: 0 8px 20px rgba(154, 128, 101, 0.25);
+    transform: translateY(-3px);
+    box-shadow: 0 10px 30px rgba(6, 182, 212, 0.45);
+    filter: brightness(1.08);
 }
 
 .btn-secundario,
 .botao-secundario {
     display: inline-flex;
     align-items: center;
-    padding: 14px 26px;
-    background: transparent;
-    color: var(--marrom);
+    padding: 13px 26px;
+    background: rgba(19, 27, 46, 0.7);
+    color: var(--titulo);
     border: 1px solid var(--borda);
-    border-radius: 6px;
+    border-radius: 8px;
     text-decoration: none;
     font-size: 14px;
-    font-weight: 500;
+    font-weight: 600;
     transition: all 0.3s ease;
 }
 
 .btn-secundario:hover,
 .botao-secundario:hover {
-    border-color: var(--destaque);
-    color: var(--destaque);
-    background: var(--claro);
+    border-color: var(--ciano);
+    color: var(--ciano);
+    background: rgba(6, 182, 212, 0.08);
+    transform: translateY(-2px);
 }
 
 /* =========================================
@@ -238,9 +248,9 @@ h2 span {
 .inicio-texto h2 {
     font-family: 'Plus Jakarta Sans', sans-serif;
     font-size: 20px;
-    font-weight: 400;
-    color: var(--texto);
-    margin-bottom: 22px;
+    font-weight: 500;
+    color: var(--ciano);
+    margin-bottom: 20px;
 }
 
 .inicio-texto p {
@@ -257,19 +267,24 @@ h2 span {
     flex-wrap: wrap;
 }
 
+/* MOLDURA DA FOTO COM BORDA NEON */
+
 .foto-placeholder {
     width: 330px;
-    height: 410px;
+    height: 400px;
     background: var(--cartao);
-    border: 1px solid var(--borda);
-    border-radius: 160px 160px 12px 12px;
+    border: 2px solid transparent;
+    background-image: linear-gradient(var(--cartao), var(--cartao)), var(--gradiente);
+    background-origin: border-box;
+    background-clip: content-box, border-box;
+    border-radius: 24px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    color: var(--destaque);
+    color: var(--ciano);
     gap: 14px;
-    box-shadow: var(--sombra);
+    box-shadow: 0 20px 50px rgba(139, 92, 246, 0.22);
     position: relative;
     overflow: hidden;
     flex-shrink: 0;
@@ -282,8 +297,10 @@ h2 span {
 }
 
 .foto-placeholder i {
-    font-size: 52px;
-    opacity: 0.7;
+    font-size: 56px;
+    background: var(--gradiente);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
 
 .foto-placeholder p {
@@ -304,7 +321,7 @@ h2 span {
 }
 
 .sobre-home {
-    background: var(--claro);
+    background: var(--fundo-secundario);
     border-bottom: 1px solid var(--borda);
 }
 
@@ -317,7 +334,7 @@ h2 span {
 }
 
 /* =========================================
-   HABILIDADES
+   HABILIDADES (CARDS COM BRILHO)
 ========================================= */
 
 .habilidades {
@@ -331,13 +348,13 @@ h2 span {
 }
 
 .habilidade {
-    background: var(--claro);
+    background: var(--cartao);
     border: 1px solid var(--borda);
-    padding: 26px 28px;
-    border-radius: 8px;
+    padding: 24px 28px;
+    border-radius: 12px;
     font-weight: 600;
     font-size: 16px;
-    color: var(--marrom);
+    color: var(--titulo);
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -345,22 +362,25 @@ h2 span {
 }
 
 .habilidade::after {
-    content: "✦";
-    color: var(--destaque);
+    content: "</>";
+    font-family: 'Space Grotesk', monospace;
+    color: var(--ciano);
     font-size: 14px;
-    opacity: 0.6;
+    font-weight: 700;
+    opacity: 0.75;
     transition: transform 0.3s ease;
 }
 
 .habilidade:hover {
-    transform: translateY(-4px);
-    border-color: var(--destaque);
-    box-shadow: var(--sombra);
+    transform: translateY(-5px);
+    background: var(--cartao-hover);
+    border-color: var(--borda-brilho);
+    box-shadow: var(--sombra-neon);
 }
 
 .habilidade:hover::after {
-    transform: rotate(90deg);
-    opacity: 1;
+    color: var(--roxo);
+    transform: scale(1.15);
 }
 
 /* =========================================
@@ -377,31 +397,33 @@ h2 span {
 }
 
 .projeto-card {
-    background: var(--claro);
-    padding: 28px;
+    background: var(--cartao);
+    padding: 26px;
     border: 1px solid var(--borda);
-    border-radius: 10px;
+    border-radius: 14px;
     transition: all 0.35s ease;
     display: flex;
     flex-direction: column;
 }
 
 .projeto-card:hover {
-    transform: translateY(-6px);
-    border-color: var(--destaque);
-    box-shadow: var(--sombra);
+    transform: translateY(-7px);
+    background: var(--cartao-hover);
+    border-color: var(--borda-brilho);
+    box-shadow: var(--sombra-neon);
 }
 
 .projeto-imagem {
     width: 100%;
-    height: 180px;
-    background: var(--cartao);
-    border-radius: 6px;
+    height: 185px;
+    background: linear-gradient(135deg, rgba(139, 92, 246, 0.18), rgba(6, 182, 212, 0.18));
+    border: 1px solid var(--borda);
+    border-radius: 10px;
     display: flex;
     align-items: center;
     justify-content: center;
-    color: var(--destaque);
-    font-size: 32px;
+    color: var(--ciano);
+    font-size: 36px;
     margin-bottom: 22px;
     overflow: hidden;
 }
@@ -415,7 +437,7 @@ h2 span {
 .projeto-card h2,
 .projeto-card h3 {
     margin-bottom: 10px;
-    color: var(--marrom);
+    color: var(--titulo);
     font-size: 22px;
 }
 
@@ -431,7 +453,7 @@ h2 span {
 ========================================= */
 
 .contato-home {
-    background: var(--cartao);
+    background: var(--fundo-secundario);
     border-top: 1px solid var(--borda);
 }
 
@@ -448,10 +470,10 @@ h2 span {
     max-width: 760px;
     margin: 40px auto 0;
     padding: 42px;
-    background: var(--claro);
+    background: var(--cartao);
     border: 1px solid var(--borda);
-    border-radius: 12px;
-    box-shadow: var(--sombra);
+    border-radius: 16px;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.35);
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 22px;
@@ -465,7 +487,7 @@ h2 span {
 }
 
 .campo-contato label {
-    color: var(--marrom);
+    color: var(--titulo);
     font-size: 13px;
     font-weight: 600;
 }
@@ -476,8 +498,8 @@ h2 span {
     padding: 14px 16px;
     background: var(--fundo);
     border: 1px solid var(--borda);
-    border-radius: 6px;
-    color: var(--marrom);
+    border-radius: 8px;
+    color: var(--titulo);
     font-family: 'Plus Jakarta Sans', sans-serif;
     font-size: 14px;
     outline: none;
@@ -486,8 +508,8 @@ h2 span {
 
 .campo-contato input:focus,
 .campo-contato textarea:focus {
-    border-color: var(--destaque);
-    background: #FFFFFF;
+    border-color: var(--ciano);
+    box-shadow: 0 0 0 3px rgba(6, 182, 212, 0.15);
 }
 
 .campo-contato textarea {
@@ -497,7 +519,7 @@ h2 span {
 
 .campo-contato input::placeholder,
 .campo-contato textarea::placeholder {
-    color: #A39A8D;
+    color: #64748B;
 }
 
 .campo-completo {
@@ -512,7 +534,7 @@ h2 span {
 
 .privacidade input {
     margin-top: 4px;
-    accent-color: var(--destaque);
+    accent-color: var(--roxo);
     cursor: pointer;
 }
 
@@ -526,20 +548,22 @@ h2 span {
 .btn-contato {
     width: 100%;
     padding: 16px;
-    background: var(--marrom);
-    color: var(--claro);
+    background: var(--gradiente);
+    color: #FFFFFF;
     border: none;
-    border-radius: 6px;
+    border-radius: 8px;
     font-family: 'Plus Jakarta Sans', sans-serif;
     font-size: 15px;
-    font-weight: 600;
+    font-weight: 700;
     cursor: pointer;
+    box-shadow: 0 8px 25px rgba(139, 92, 246, 0.35);
     transition: all 0.3s ease;
 }
 
 .btn-contato:hover {
-    background: var(--destaque);
     transform: translateY(-2px);
+    box-shadow: 0 12px 32px rgba(6, 182, 212, 0.45);
+    filter: brightness(1.08);
 }
 
 .btn-contato:disabled {
@@ -548,7 +572,7 @@ h2 span {
 }
 
 #retornoContato {
-    color: var(--destaque);
+    color: var(--ciano);
     font-weight: 600;
     font-size: 14px;
     text-align: center;
@@ -563,24 +587,24 @@ h2 span {
     position: fixed;
     bottom: 28px;
     right: 28px;
-    width: 58px;
-    height: 58px;
-    background: #25D366;
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(135deg, #25D366, #128C7E);
     color: white;
     border-radius: 50%;
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 28px;
+    font-size: 29px;
     text-decoration: none;
-    box-shadow: 0 8px 24px rgba(37, 211, 102, 0.32);
+    box-shadow: 0 8px 28px rgba(37, 211, 102, 0.45);
     z-index: 999;
     transition: transform 0.3s ease;
 }
 
 .whatsapp-flutuante:hover,
 .whatsapp-float:hover {
-    transform: scale(1.08);
+    transform: scale(1.1) rotate(5deg);
 }
 
 /* =========================================
@@ -615,14 +639,25 @@ h2 span {
     min-width: 280px;
     height: 360px;
     background: var(--cartao);
-    border: 1px solid var(--borda);
-    border-radius: 140px 140px 10px 10px;
+    border: 2px solid transparent;
+    background-image: linear-gradient(var(--cartao), var(--cartao)), var(--gradiente);
+    background-origin: border-box;
+    background-clip: content-box, border-box;
+    border-radius: 24px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    color: var(--destaque);
+    color: var(--ciano);
     gap: 12px;
+    box-shadow: var(--sombra-neon);
+    overflow: hidden;
+}
+
+.sobre-foto img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 
 .sobre-foto i {
@@ -636,7 +671,7 @@ h2 span {
 .sobre-texto h2,
 .sobre-texto h3 {
     margin-bottom: 18px;
-    color: var(--marrom);
+    color: var(--titulo);
 }
 
 .sobre-texto p {
@@ -646,7 +681,7 @@ h2 span {
 }
 
 /* =========================================
-   LOGIN & PAINEL ADMINISTRATIVO
+   LOGIN & PAINEL ADMINISTRATIVO (DARK TECH)
 ========================================= */
 
 .login-container {
@@ -660,16 +695,16 @@ h2 span {
 .login-card {
     width: 100%;
     max-width: 430px;
-    background: var(--claro);
+    background: var(--cartao);
     padding: 42px;
     border: 1px solid var(--borda);
-    border-radius: 10px;
-    box-shadow: var(--sombra);
+    border-radius: 16px;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
 }
 
 .login-icone {
-    font-size: 27px;
-    color: var(--destaque);
+    font-size: 28px;
+    color: var(--ciano);
     margin-bottom: 20px;
 }
 
@@ -687,7 +722,7 @@ h2 span {
 .login-card label {
     display: block;
     margin: 18px 0 8px;
-    color: var(--marrom);
+    color: var(--titulo);
     font-size: 13px;
     font-weight: 600;
 }
@@ -697,35 +732,35 @@ h2 span {
     padding: 14px;
     border: 1px solid var(--borda);
     background: var(--fundo);
-    border-radius: 6px;
+    color: var(--titulo);
+    border-radius: 8px;
     outline: none;
 }
 
 .login-card input:focus {
-    border-color: var(--destaque);
-    background: #FFFFFF;
+    border-color: var(--ciano);
 }
 
 .login-card button {
     width: 100%;
     padding: 15px;
     margin-top: 24px;
-    background: var(--marrom);
+    background: var(--gradiente);
     color: white;
     border: none;
-    border-radius: 6px;
-    font-weight: 600;
+    border-radius: 8px;
+    font-weight: 700;
     cursor: pointer;
     transition: 0.3s;
 }
 
 .login-card button:hover {
-    background: var(--destaque);
+    filter: brightness(1.1);
 }
 
 #mensagemLogin {
     margin-top: 15px;
-    color: #8B4038;
+    color: #F87171;
     font-size: 13px;
 }
 
@@ -739,18 +774,48 @@ h2 span {
 }
 
 .botao-sair {
-    background: var(--marrom);
-    color: white;
+    background: rgba(239, 68, 68, 0.15);
+    color: #FCA5A5;
     padding: 10px 20px;
-    border: none;
-    border-radius: 6px;
+    border: 1px solid rgba(239, 68, 68, 0.4);
+    border-radius: 8px;
     font-size: 13px;
+    font-weight: 600;
     cursor: pointer;
     transition: 0.3s;
 }
 
 .botao-sair:hover {
-    background: var(--destaque);
+    background: #EF4444;
+    color: white;
+}
+
+/* Ajuste dos cards internos do painel.html para combinar com o Dark Tech */
+.gerenciar-form,
+.item-projeto {
+    background: var(--cartao) !important;
+    border: 1px solid var(--borda) !important;
+    color: var(--titulo) !important;
+}
+
+.gerenciar-form label,
+.item-projeto h3 {
+    color: var(--titulo) !important;
+}
+
+.item-projeto p {
+    color: var(--texto) !important;
+}
+
+.item-projeto small {
+    color: var(--ciano) !important;
+}
+
+.gerenciar-form input,
+.gerenciar-form textarea {
+    background: var(--fundo) !important;
+    border: 1px solid var(--borda) !important;
+    color: var(--titulo) !important;
 }
 
 /* =========================================
