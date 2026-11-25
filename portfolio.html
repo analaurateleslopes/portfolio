@@ -143,7 +143,6 @@
             try {
                 const projetos = await window.supabaseApp.listarProjetos();
 
-                // Se houver projetos cadastrados no Painel Adm, exibe eles na tela
                 if (projetos && projetos.length > 0) {
                     vitrine.innerHTML = projetos.map((projeto, index) => {
                         const imagem = validarUrl(projeto.imagem);
