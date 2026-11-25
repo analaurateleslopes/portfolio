@@ -274,14 +274,18 @@ document.addEventListener("DOMContentLoaded", function () {
             const mensagemFormatada = `Olá Ana Laura! Vim pelo seu portfólio.\n\n*Nome:* ${dados.nome}\n*Assunto:* ${dados.assunto}\n*Mensagem:* ${dados.mensagem}`;
             const linkWhatsApp = `https://wa.me/${MEU_WHATSAPP}?text=${encodeURIComponent(mensagemFormatada)}`;
 
-            retorno.textContent = "Mensagem salva! Abrindo o WhatsApp...";
+            if (retorno) {
+                retorno.textContent = "Mensagem salva! Abrindo o WhatsApp...";
+            }
             formulario.reset();
 
-            window.open(linkWhatsApp, "_blank");
+            window.open(linkWhatsApp, "_blank", "noopener,noreferrer");
 
         } catch (erro) {
             console.error("Erro ao enviar contato:", erro);
-            retorno.textContent = erro.message || "Não foi possível enviar sua mensagem.";
+            if (retorno) {
+                retorno.textContent = erro.message || "Não foi possível enviar sua mensagem.";
+            }
         } finally {
             botao.disabled = false;
             botao.textContent = "Enviar mensagem";
