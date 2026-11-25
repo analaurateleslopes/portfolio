@@ -21,12 +21,13 @@
 
             <a href="index.html" class="logo">Ana Laura.</a>
 
-            <nav>
+            <nav aria-label="Navegação principal">
                 <a href="index.html">Início</a>
                 <a href="quemsoueu.html">Quem sou eu</a>
                 <a href="portfolio.html">Portfólio</a>
+                <a href="index.html#referencias">Referências</a>
                 <a href="index.html#contato">Contato</a>
-                <a href="login.html" aria-label="Área administrativa">
+                <a href="login.html" aria-label="Área administrativa" title="Área administrativa">
                     <i class="fa-solid fa-lock"></i>
                 </a>
             </nav>
@@ -38,7 +39,7 @@
         <div class="container">
 
             <section class="titulo-pagina">
-                <p class="subtitulo">MEUS TRABALHOS</p>
+                <p class="subtitulo">MEUS TRABALHOS · 2026</p>
                 <h1>Meu <span>portfólio.</span></h1>
                 <p>Conheça alguns dos projetos que desenvolvi durante meus estudos e trabalhos.</p>
             </section>
@@ -50,36 +51,39 @@
                     <div class="projeto-imagem">
                         <i class="fa-solid fa-utensils"></i>
                     </div>
+                    <span class="tag-projeto">01 · Web & UI</span>
                     <h2>Cardápio Digital</h2>
                     <p>
                         Projeto de desenvolvimento web com apresentação
                         de produtos, categorias e carrinho.
                     </p>
-                    <small style="color: var(--destaque); font-weight: 600;">HTML • CSS • JavaScript</small>
+                    <small class="stack-projeto">HTML • CSS • JavaScript</small>
                 </article>
 
                 <article class="projeto-card">
                     <div class="projeto-imagem">
                         <i class="fa-solid fa-database"></i>
                     </div>
+                    <span class="tag-projeto">02 · Dados & Backend</span>
                     <h2>Banco de Dados Escolar</h2>
                     <p>
                         Projeto de organização e gerenciamento
                         de informações utilizando banco de dados.
                     </p>
-                    <small style="color: var(--destaque); font-weight: 600;">SQL • Supabase</small>
+                    <small class="stack-projeto">SQL • Supabase</small>
                 </article>
 
                 <article class="projeto-card">
                     <div class="projeto-imagem">
                         <i class="fa-solid fa-laptop-code"></i>
                     </div>
+                    <span class="tag-projeto">03 · Frontend & Painel</span>
                     <h2>Site Pessoal</h2>
                     <p>
                         Criação de uma página pessoal com informações,
                         apresentação e identidade visual.
                     </p>
-                    <small style="color: var(--destaque); font-weight: 600;">HTML • CSS • JavaScript</small>
+                    <small class="stack-projeto">HTML • CSS • JavaScript</small>
                 </article>
 
             </section>
@@ -94,8 +98,8 @@
         </div>
     </footer>
 
-    <!-- BOTÃO WHATSAPP (Troque SEUNUMERO por 55 + DDD + Número) -->
-    <a href="https://wa.me/SEUNUMERO"
+    <!-- BOTÃO WHATSAPP -->
+    <a href="https://wa.me/5533999855969"
         class="whatsapp-flutuante"
         target="_blank"
         rel="noopener noreferrer"
@@ -141,9 +145,10 @@
 
                 // Se houver projetos cadastrados no Painel Adm, exibe eles na tela
                 if (projetos && projetos.length > 0) {
-                    vitrine.innerHTML = projetos.map(projeto => {
+                    vitrine.innerHTML = projetos.map((projeto, index) => {
                         const imagem = validarUrl(projeto.imagem);
                         const link = validarUrl(projeto.link);
+                        const numero = String(index + 1).padStart(2, "0");
 
                         return `
                             <article class="projeto-card">
@@ -153,14 +158,11 @@
                                         : `<i class="fa-solid fa-folder-open"></i>`
                                     }
                                 </div>
+                                <span class="tag-projeto">${numero}${projeto.categoria ? ` · ${escaparTexto(projeto.categoria)}` : ""}</span>
                                 <h2>${escaparTexto(projeto.titulo)}</h2>
                                 <p>${escaparTexto(projeto.descricao)}</p>
-                                ${projeto.categoria
-                                    ? `<small style="color: var(--destaque); font-weight: 600; display: block; margin-bottom: 16px;">${escaparTexto(projeto.categoria)}</small>`
-                                    : ""
-                                }
                                 ${link
-                                    ? `<a href="${escaparTexto(link)}" target="_blank" rel="noopener noreferrer" class="btn-secundario" style="margin-top: auto;">Ver projeto <i class="fa-solid fa-arrow-up-right-from-square" style="margin-left: 6px; font-size: 12px;"></i></a>`
+                                    ? `<a href="${escaparTexto(link)}" target="_blank" rel="noopener noreferrer" class="btn-secundario botao-projeto">Ver projeto <i class="fa-solid fa-arrow-up-right-from-square"></i></a>`
                                     : ""
                                 }
                             </article>
@@ -172,81 +174,6 @@
             }
         });
     </script>
-
-</body>
-</html>
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portfólio | Ana Laura</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
-
-<header class="cabecalho">
-    <a href="index.html" class="logo">ana laura.</a>
-
-    <nav>
-        <a href="index.html">Início</a>
-        <a href="quemsoueu.html">Sobre mim</a>
-        <a href="portfolio.html">Portfólio</a>
-        <a href="index.html#contato">Contato</a>
-        <a href="login.html" class="cadeado" aria-label="Área restrita">🔒</a>
-    </nav>
-</header>
-
-<main class="pagina">
-
-    <section class="titulo-pagina">
-        <p class="subtitulo">MEUS TRABALHOS</p>
-        <h1>Meu <span>portfólio.</span></h1>
-        <p>Conheça alguns dos projetos que desenvolvi durante meus estudos.</p>
-    </section>
-
-    <section class="projetos">
-
-        <article class="projeto-card">
-            <span>01</span>
-            <h2>Cardápio Digital</h2>
-            <p>
-                Projeto de desenvolvimento web com apresentação
-                de produtos, categorias e carrinho.
-            </p>
-            <small>HTML • CSS • JavaScript</small>
-        </article>
-
-        <article class="projeto-card">
-            <span>02</span>
-            <h2>Banco de Dados Escolar</h2>
-            <p>
-                Projeto de organização e gerenciamento
-                de informações utilizando banco de dados.
-            </p>
-            <small>SQL • Supabase</small>
-        </article>
-
-        <article class="projeto-card">
-            <span>03</span>
-            <h2>Site Pessoal</h2>
-            <p>
-                Criação de uma página pessoal com informações,
-                apresentação e identidade visual.
-            </p>
-            <small>HTML • CSS • JavaScript</small>
-        </article>
-
-    </section>
-
-</main>
-
-<footer>
-    <p>© 2026 Ana Laura Lopes. Todos os direitos reservados.</p>
-</footer>
-
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="script.js"></script>
 
 </body>
 </html>
