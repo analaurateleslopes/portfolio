@@ -1,5 +1,394 @@
 
+/* ==========================================
+   PORTFÓLIO ANA LAURA
+   ESTILO GERAL
+========================================== */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+:root {
+    --fundo: #F3F0E9;
+    --cartao: #FFFFFF;
+    --titulo: #39352F;
+    --texto: #777168;
+    --borda: #DED8CD;
+    --destaque: #8B7355;
+    --sombra-neon: 0 10px 30px rgba(57, 53, 47, .08);
+}
+
+body {
+    background: var(--fundo);
+    color: var(--titulo);
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+}
+
+.container {
+    width: min(1120px, 90%);
+    margin: auto;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+button, input, textarea {
+    font: inherit;
+}
+
+/* MENU */
+
+.cabecalho {
+    background: var(--cartao);
+    border-bottom: 1px solid var(--borda);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.menu {
+    min-height: 78px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.logo {
+    font-size: 1.7rem;
+    font-weight: bold;
+    color: var(--destaque);
+}
+
+.menu nav {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 24px;
+}
+
+.menu nav a {
+    font-size: .95rem;
+    transition: .3s;
+}
+
+.menu nav a:hover {
+    color: var(--destaque);
+}
+
+/* INÍCIO */
+
+.inicio {
+    padding: 90px 0;
+}
+
+.inicio-conteudo {
+    display: grid;
+    grid-template-columns: 1.3fr .7fr;
+    align-items: center;
+    gap: 50px;
+}
+
+.inicio-texto > span,
+.titulo-secao span {
+    color: var(--destaque);
+    font-size: .8rem;
+    font-weight: bold;
+    letter-spacing: 2px;
+}
+
+.inicio h1 {
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    line-height: 1.2;
+    margin: 15px 0;
+}
+
+.inicio h1 strong {
+    color: var(--destaque);
+}
+
+.inicio h2 {
+    font-size: 1.3rem;
+    margin-bottom: 20px;
+}
+
+.inicio p,
+.sobre-home p {
+    color: var(--texto);
+    max-width: 650px;
+}
+
+.botoes-inicio {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-top: 30px;
+}
+
+.btn,
+.btn-secundario {
+    display: inline-block;
+    padding: 13px 23px;
+    border-radius: 8px;
+    transition: .3s;
+}
+
+.btn {
+    background: var(--destaque);
+    color: white;
+}
+
+.btn:hover {
+    opacity: .85;
+    transform: translateY(-2px);
+}
+
+.btn-secundario {
+    border: 1px solid var(--destaque);
+    color: var(--destaque);
+}
+
+.foto-placeholder {
+    display: flex;
+    justify-content: center;
+}
+
+.foto-perfil {
+    width: 290px;
+    height: 350px;
+    object-fit: cover;
+    border-radius: 150px 150px 20px 20px;
+    border: 5px solid white;
+    box-shadow: var(--sombra-neon);
+}
+
+/* SEÇÕES */
+
+.sobre-home,
+.habilidades,
+.projetos-home,
+.referencias-home,
+.contato-home {
+    padding: 75px 0;
+}
+
+.sobre-home,
+.projetos-home,
+.contato-home {
+    background: var(--cartao);
+}
+
+.titulo-secao {
+    margin-bottom: 35px;
+}
+
+.titulo-secao h2 {
+    font-size: 2rem;
+    margin: 8px 0;
+}
+
+.titulo-secao p {
+    color: var(--texto);
+}
+
+/* HABILIDADES */
+
+.habilidades-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+    gap: 15px;
+}
+
+.habilidade {
+    background: var(--cartao);
+    border: 1px solid var(--borda);
+    border-radius: 10px;
+    padding: 22px;
+    font-weight: bold;
+}
+
+/* PROJETOS */
+
+.projetos-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 22px;
+    margin-bottom: 30px;
+}
+
+.projeto-card {
+    background: var(--fundo);
+    border: 1px solid var(--borda);
+    border-radius: 14px;
+    padding: 24px;
+    overflow-wrap: anywhere;
+}
+
+.projeto-card h3 {
+    margin: 12px 0;
+}
+
+.projeto-card p {
+    color: var(--texto);
+}
+
+.projeto-imagem {
+    height: 130px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #E8E1D6;
+    border-radius: 10px;
+    font-size: 2rem;
+}
+
+.imagem-projeto {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+/* REFERÊNCIAS */
+
+.referencias-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 20px;
+}
+
+.referencia-card {
+    background: var(--cartao);
+    border: 1px solid var(--borda);
+    padding: 25px;
+    border-radius: 12px;
+}
+
+.referencia-card h3 {
+    margin-bottom: 8px;
+}
+
+.referencia-card p {
+    color: var(--texto);
+    margin: 15px 0;
+}
+
+.referencia-card a {
+    color: var(--destaque);
+    font-weight: bold;
+}
+
+.badge-ref,
+.tag-projeto {
+    color: var(--destaque);
+    font-size: .8rem;
+    font-weight: bold;
+}
+
+/* CONTATO */
+
+.form-contato {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    max-width: 800px;
+}
+
+.campo-contato {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.campo-completo {
+    grid-column: 1 / -1;
+}
+
+.campo-contato input,
+.campo-contato textarea {
+    padding: 13px;
+    border: 1px solid var(--borda);
+    background: var(--fundo);
+    border-radius: 8px;
+    outline: none;
+}
+
+.campo-contato input:focus,
+.campo-contato textarea:focus {
+    border-color: var(--destaque);
+}
+
+.campo-contato textarea {
+    resize: vertical;
+}
+
+.privacidade {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    color: var(--texto);
+}
+
+.privacidade input {
+    margin-top: 5px;
+}
+
+.btn-contato {
+    background: var(--destaque);
+    color: white;
+    padding: 14px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.btn-contato:disabled {
+    opacity: .6;
+    cursor: wait;
+}
+
+.retorno-contato {
+    color: var(--destaque);
+}
+
+/* RODAPÉ */
+
+.rodape {
+    background: #39352F;
+    color: white;
+    padding: 25px;
+    text-align: center;
+}
+
+/* WHATSAPP */
+
+.whatsapp-flutuante {
+    position: fixed;
+    bottom: 25px;
+    right: 25px;
+    background: #25D366;
+    color: white;
+    width: 55px;
+    height: 55px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    font-size: 1.8rem;
+    z-index: 200;
+}
+
 /* LOGIN */
+
 .login-container {
     min-height: 78vh;
     display: flex;
@@ -19,14 +408,14 @@
 }
 
 .login-icone {
-    color: var(--ciano);
+    color: var(--destaque);
     font-size: 2.4rem;
     text-align: center;
     margin-bottom: 20px;
 }
 
 .login-card .subtitulo {
-    color: var(--ciano);
+    color: var(--destaque);
     font-size: .8rem;
     font-weight: 700;
     letter-spacing: 2px;
@@ -40,7 +429,7 @@
 }
 
 .login-card h1 span {
-    color: var(--ciano);
+    color: var(--destaque);
 }
 
 .login-descricao {
@@ -71,6 +460,7 @@
 .login-card form .btn {
     width: 100%;
     margin-top: 22px;
+    cursor: pointer;
 }
 
 #mensagemLogin {
@@ -82,7 +472,7 @@
     display: block;
     text-align: center;
     margin-top: 22px;
-    color: var(--ciano);
+    color: var(--destaque);
 }
 
 .gerenciar-form {
@@ -147,9 +537,7 @@
     border-radius: 8px;
     padding: 10px 15px;
     color: white;
-    text-decoration: none;
     cursor: pointer;
-    font-family: inherit;
 }
 
 .acao-editar {
@@ -165,16 +553,53 @@
 }
 
 #statusProjetos {
-    color: var(--ciano);
+    color: var(--destaque);
     margin-top: 15px;
 }
 
-@media(max-width: 600px) {
-    .login-card {
-        padding: 24px;
+/* RESPONSIVIDADE */
+
+@media(max-width: 750px) {
+    .menu {
+        flex-direction: column;
+        padding: 15px 0;
     }
 
+    .menu nav {
+        justify-content: center;
+        gap: 13px;
+    }
+
+    .inicio-conteudo {
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+
+    .inicio-texto p {
+        margin: auto;
+    }
+
+    .botoes-inicio {
+        justify-content: center;
+    }
+
+    .foto-perfil {
+        width: 230px;
+        height: 280px;
+    }
+}
+
+@media(max-width: 600px) {
+    .form-contato {
+        grid-template-columns: 1fr;
+    }
+
+    .campo-completo {
+        grid-column: auto;
+    }
+
+    .login-card,
     .gerenciar-form {
-        padding: 20px;
+        padding: 22px;
     }
 }
