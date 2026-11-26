@@ -1,139 +1,88 @@
 
 <!DOCTYPE html>
 <html lang="pt-BR">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>Área Restrita | Ana Laura</title>
-
+    <title>Login | Ana Laura</title>
     <link rel="stylesheet" href="style.css">
-
-    <link rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
-
 <body>
 
-    <header class="cabecalho">
-        <a href="index.html" class="logo">ana laura.</a>
+<header class="cabecalho">
+    <div class="container menu">
+        <a href="index.html" class="logo">Ana Laura.</a>
+        <nav><a href="index.html">Voltar ao início</a></nav>
+    </div>
+</header>
 
-        <nav>
-            <a href="index.html">Voltar ao início</a>
-        </nav>
-    </header>
+<main class="login-container">
+    <section class="login-card">
+        <div class="login-icone">
+            <i class="fa-solid fa-lock"></i>
+        </div>
 
-    <main class="login-container">
+        <p class="subtitulo">ACESSO ADMINISTRATIVO</p>
+        <h1>Área <span>restrita.</span></h1>
 
-        <section class="login-card">
+        <p class="login-descricao">
+            Entre com seus dados para acessar o painel administrativo.
+        </p>
 
-            <div class="login-icone">
-                <i class="fa-solid fa-lock"></i>
-            </div>
+        <form id="loginForm">
+            <label for="email">E-mail</label>
+            <input type="email" id="email" placeholder="Digite seu e-mail" required>
 
-            <p class="subtitulo">ACESSO ADMINISTRATIVO</p>
+            <label for="senha">Senha</label>
+            <input type="password" id="senha" placeholder="Digite sua senha" required>
 
-            <h1>Área <span>restrita.</span></h1>
+            <button type="submit" id="botaoLogin" class="btn">
+                Entrar
+            </button>
 
-            <p class="login-descricao">
-                Entre com seus dados para acessar o painel administrativo.
-            </p>
+            <p id="mensagemLogin" aria-live="polite"></p>
+        </form>
 
-            <form id="loginForm" onsubmit="return false;">
+        <a href="index.html" class="voltar">Voltar para o site</a>
+    </section>
+</main>
 
-                <label for="email">E-mail</label>
+<footer class="rodape">
+    © 2026 Ana Laura Lopes. Todos os direitos reservados.
+</footer>
 
-                <input
-                    type="email"
-                    id="email"
-                    placeholder="Digite seu e-mail"
-                    required
-                >
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="java.js"></script>
 
-                <label for="senha">Senha</label>
+<script>
+document.getElementById("loginForm").addEventListener("submit", async function(e) {
+    e.preventDefault();
 
-                <input
-                    type="password"
-                    id="senha"
-                    placeholder="Digite sua senha"
-                    required
-                >
+    const botao = document.getElementById("botaoLogin");
+    const mensagem = document.getElementById("mensagemLogin");
 
-                <button
-                    type="button"
-                    id="botaoLogin"
-                    onclick="entrarNoPainel()">
-                    Entrar
-                </button>
+    botao.disabled = true;
+    botao.textContent = "Verificando...";
+    mensagem.textContent = "";
 
-                <p id="mensagemLogin" role="alert"></p>
+    try {
+        await window.supabaseApp.fazerLogin(
+            document.getElementById("email").value.trim(),
+            document.getElementById("senha").value
+        );
 
-            </form>
+        window.location.href = "painel.html";
 
-            <a href="index.html" class="voltar">
-                Voltar para o site
-            </a>
-
-        </section>
-
-    </main>
-
-    <footer>
-        <p>© 2026 Ana Laura Lopes. Todos os direitos reservados.</p>
-    </footer>
-
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    <script src="java.js"></script>
-
-    <script>
-
-        async function entrarNoPainel() {
-
-            const email = document.getElementById("email").value.trim();
-            const senha = document.getElementById("senha").value;
-
-            const botao = document.getElementById("botaoLogin");
-            const mensagem = document.getElementById("mensagemLogin");
-
-            mensagem.textContent = "";
-
-            if (!email || !senha) {
-                mensagem.textContent = "Preencha o e-mail e a senha.";
-                return;
-            }
-
-            botao.disabled = true;
-            botao.textContent = "Verificando...";
-
-            try {
-
-                if (!window.supabaseApp || !window.supabaseApp.client) {
-                    throw new Error("O arquivo java.js não foi carregado.");
-                }
-
-                await window.supabaseApp.fazerLogin(email, senha);
-
-                mensagem.style.color = "#55734D";
-                mensagem.textContent = "Acesso autorizado!";
-
-                window.location.href = "painel.html";
-
-            } catch (erro) {
-
-                mensagem.style.color = "#A13D35";
-                mensagem.textContent = erro.message;
-
-            } finally {
-
-                botao.disabled = false;
-                botao.textContent = "Entrar";
-
-            }
-
-        }
-
-    </script>
+    } catch (erro) {
+        mensagem.textContent = erro.message;
+        mensagem.style.color = "#f87171";
+    } finally {
+        botao.disabled = false;
+        botao.textContent = "Entrar";
+    }
+});
+</script>
 
 </body>
 </html>
