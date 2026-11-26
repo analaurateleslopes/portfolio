@@ -1,7 +1,7 @@
 
 /* ==========================================
    PORTFÓLIO ANA LAURA
-   CONEXÃO E GERENCIAMENTO SUPABASE
+   CONEXÃO SUPABASE
 ========================================== */
 
 const SUPABASE_URL = "https://alzebirqbhxecbqgcihu.supabase.co";
@@ -15,19 +15,18 @@ const client = window.supabase.createClient(
     SUPABASE_KEY
 );
 
-// LOGIN
+/* LOGIN */
 async function fazerLogin(email, senha) {
     const { data, error } = await client.auth.signInWithPassword({
-        email,
+        email: email,
         password: senha
     });
 
     if (error) throw error;
-
     return data;
 }
 
-// VERIFICAR ADMINISTRADOR
+/* VERIFICAR ADMINISTRADOR */
 async function verificarAdministrador() {
     const { data, error } = await client.auth.getUser();
 
@@ -36,13 +35,13 @@ async function verificarAdministrador() {
     return data.user.app_metadata?.role === "admin";
 }
 
-// SAIR
+/* SAIR */
 async function fazerLogout() {
     await client.auth.signOut();
     window.location.href = "login.html";
 }
 
-// LISTAR PROJETOS
+/* LISTAR PROJETOS */
 async function listarProjetos() {
     const { data, error } = await client
         .from("projetos")
@@ -53,7 +52,7 @@ async function listarProjetos() {
     return data || [];
 }
 
-// CADASTRAR PROJETO
+/* CADASTRAR PROJETO */
 async function cadastrarProjeto(projeto) {
     if (!(await verificarAdministrador())) {
         throw new Error("Acesso não autorizado.");
@@ -68,7 +67,7 @@ async function cadastrarProjeto(projeto) {
     return data;
 }
 
-// EDITAR PROJETO
+/* EDITAR PROJETO */
 async function atualizarProjeto(id, projeto) {
     if (!(await verificarAdministrador())) {
         throw new Error("Acesso não autorizado.");
@@ -84,7 +83,7 @@ async function atualizarProjeto(id, projeto) {
     return data;
 }
 
-// EXCLUIR PROJETO
+/* EXCLUIR PROJETO */
 async function excluirProjeto(id) {
     if (!(await verificarAdministrador())) {
         throw new Error("Acesso não autorizado.");
@@ -98,7 +97,7 @@ async function excluirProjeto(id) {
     if (error) throw error;
 }
 
-// ENVIAR MENSAGEM
+/* ENVIAR MENSAGEM */
 async function enviarLead(dados) {
     const { data, error } = await client
         .from("leads")
@@ -109,7 +108,7 @@ async function enviarLead(dados) {
     return data;
 }
 
-// LISTAR MENSAGENS
+/* LISTAR MENSAGENS */
 async function listarLeads() {
     if (!(await verificarAdministrador())) {
         throw new Error("Acesso não autorizado.");
@@ -124,7 +123,7 @@ async function listarLeads() {
     return data || [];
 }
 
-// EXCLUIR MENSAGEM
+/* EXCLUIR MENSAGEM */
 async function excluirLead(id) {
     if (!(await verificarAdministrador())) {
         throw new Error("Acesso não autorizado.");
@@ -138,7 +137,7 @@ async function excluirLead(id) {
     if (error) throw error;
 }
 
-// DISPONIBILIZAR FUNÇÕES
+/* DISPONIBILIZAR FUNÇÕES */
 window.supabaseApp = {
     client,
     fazerLogin,
@@ -153,67 +152,90 @@ window.supabaseApp = {
     excluirLead
 };
 
-// FORMULÁRIO DE CONTATO
+/* FORMULÁRIO DE CONTATO */
 document.addEventListener("DOMContentLoaded", function () {
-
     const formulario = document.getElementById("formContato");
 
-    if (!formulario) return;
+    if (formulario) {
+        formulario.addEventListener("submit", async function (event) {
+            event.preventDefault();
 
-    formulario.addEventListener("submit", async function (event) {
+            const retorno = document.getElementById("retornoContato");
+            const botao = formulario.querySelector('button[type="submit"]');
 
-        event.preventDefault();
+            botao.disabled = true;
+            retorno.textContent = "Enviando mensagem...";
 
-        const retorno = document.getElementById("retornoContato");
-        const botao = formulario.querySelector('button[type="submit"]');
+            try {
+                const dados = {
+                    nome: document.getElementById("nome").value.trim(),
+                    email: document.getElementById("email").value.trim(),
+                    whatsapp: document.getElementById("whatsapp").value.trim(),
+                    assunto: document.getElementById("assunto").value.trim(),
+                    mensagem: document.getElementById("mensagem").value.trim(),
+                    aceitou_privacidade: document.getElementById("privacidade").checked
+                };
 
-        botao.disabled = true;
+                if (!dados.aceitou_privacidade) {
+                    throw new Error("Aceite a política de privacidade.");
+                }
 
-        try {
-            const dados = {
-                nome: document.getElementById("nome").value.trim(),
-                email: document.getElementById("email").value.trim(),
-                whatsapp: document.getElementById("whatsapp").value.trim(),
-                assunto: document.getElementById("assunto").value.trim(),
-                mensagem: document.getElementById("mensagem").value.trim(),
-                aceitou_privacidade: document.getElementById("privacidade").checked
-            };
+                await enviarLead(dados);
 
-            if (!dados.nome || !dados.email || !dados.mensagem) {
-                throw new Error("Preencha os campos obrigatórios.");
-            }
-
-            if (!dados.aceitou_privacidade) {
-                throw new Error("Aceite a política de privacidade.");
-            }
-
-            await enviarLead(dados);
-
-            if (retorno) {
                 retorno.textContent = "Mensagem enviada com sucesso!";
+                formulario.reset();
+
+            } catch (erro) {
+                retorno.textContent = "Erro ao enviar: " + erro.message;
+            } finally {
+                botao.disabled = false;
             }
+        });
+    }
 
-            const texto = `Olá Ana Laura! Vim pelo seu portfólio.
+    carregarDestaques();
+});
 
-Nome: ${dados.nome}
-Assunto: ${dados.assunto}
-Mensagem: ${dados.mensagem}`;
+/* MOSTRAR PROJETOS NA PÁGINA INICIAL */
+async function carregarDestaques() {
+    const area = document.getElementById("projetosDestaque");
+    if (!area) return;
 
-            formulario.reset();
+    try {
+        const projetos = await listarProjetos();
 
-            window.open(
-                `https://wa.me/${MEU_WHATSAPP}?text=${encodeURIComponent(texto)}`,
-                "_blank"
-            );
-
-        } catch (erro) {
-            if (retorno) {
-                retorno.textContent = erro.message;
-            }
-        } finally {
-            botao.disabled = false;
+        if (!projetos.length) {
+            area.textContent = "Nenhum projeto cadastrado ainda.";
+            return;
         }
 
-    });
+        area.innerHTML = "";
 
-});
+        projetos.slice(0, 3).forEach(projeto => {
+            const card = document.createElement("article");
+            card.className = "projeto-card";
+
+            const titulo = document.createElement("h3");
+            titulo.textContent = projeto.titulo;
+
+            const descricao = document.createElement("p");
+            descricao.textContent = projeto.descricao || "";
+
+            card.append(titulo, descricao);
+
+            if (projeto.imagem) {
+                const img = document.createElement("img");
+                img.src = projeto.imagem;
+                img.alt = projeto.titulo;
+                img.className = "imagem-projeto";
+                card.prepend(img);
+            }
+
+            area.appendChild(card);
+        });
+
+    } catch (erro) {
+        area.textContent = "Não foi possível carregar os projetos.";
+        console.error(erro);
+    }
+}
